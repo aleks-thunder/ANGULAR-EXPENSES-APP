@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
-import { productSales, productSalesMulti } from '../../data/chart-prod';
+import { ChartDataset, ChartOptions } from 'chart.js';
 
 @Component({
   selector: 'app-graphic',
@@ -9,14 +8,20 @@ import { productSales, productSalesMulti } from '../../data/chart-prod';
 })
 export class GraphicComponent implements OnInit {
 
-  productSales: any
-  productSalesMulti: any
+  public data: ChartDataset[] = [
+    {data: [10, 5, 20, 30], label: 'a1'},
+    {data: [20, 5, 15, 20], label: 'a2'}
+  ];
+  public labels: string[] = ['jan', 'feb', 'mar'];
+  public options: ChartOptions = {
+    scales: {
+      y: { beginAtZero: true}
+    }
+  }
 
-  view: any = [700, 370];
-  constructor() { Object.assign(this, { productSales, productSalesMulti }); }
+  constructor() { }
 
   ngOnInit(): void {
   }
 
-  
 }

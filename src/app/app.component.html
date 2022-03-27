@@ -1,14 +1,11 @@
-<!-- <mat-slider min="1" max="100" step="1" value="50"></mat-slider> -->
+<nav>
+  <!-- ng If user logged -->
+  <button class="btn btn-primary m-1" routerLink="/">Home</button>
+  <button class="btn btn-primary m-1" routerLink="/dashboard">Dashboard</button>
+  <button class="btn btn-primary m-1" routerLink="/auth">Sign in</button>
+  <button class="btn btn-primary m-1" routerLink="/auth">Logout</button>
+</nav>
 
-<app-header-menu></app-header-menu>
+<router-outlet></router-outlet>
 
-<div class="graphic-header">
-  <h1>MY EXPENSE TRACKER</h1>
-  <h3>February 2022</h3>
-  <h4>Balance: <span>200</span> $</h4>
-</div>
-
-<app-graphic></app-graphic>
-<app-left-right-content></app-left-right-content>
-
-
+<app-bottom-links></app-bottom-links>

@@ -1,0 +1,45 @@
+<mat-tab-group mat-align-tabs="center" backgroundColor="primary">
+  <mat-tab label="Log In">
+    <div class="glass">
+      <mat-card>
+
+        <h1>Have an account ? Just Log In</h1>
+
+        <form [formGroup]="formLogin" (ngSubmit)="onLogin()">
+          <mat-form-field appearance="legacy" *ngFor="let item of inputLog">
+            <mat-label>{{ item.label }}</mat-label>
+            <input matInput type={{item.type}} formControlName={{item.form}}>
+            <!-- <mat-icon matSuffix> <fa-icon *ngIf="item.label == 'Description'" [icon]="faPen"></fa-icon> </mat-icon> -->
+          </mat-form-field>
+          <button mat-fab color="primary" type="submit" [disabled]="!formLogin.valid">
+            <mat-icon class="btn-submit" style="font-size:20px">&check;</mat-icon>
+          </button>
+        </form>
+
+      </mat-card>
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Register">
+    <div class="glass">
+      <mat-card>
+
+        <h1>It will not take a while</h1>
+
+        <form [formGroup]="formRegister" (ngSubmit)="onRegister()">
+          <mat-form-field appearance="legacy" *ngFor="let item of inputReg">
+            <mat-label>{{ item.label }}</mat-label>
+
+            <!-- <input matInput type={{item.type}} formControlName={{item.form}} *ngIf="!(item.form == 'passwordVisible')"> -->
+            <input matInput type={{item.type}} formControlName={{item.form}}>
+
+          </mat-form-field>
+          <button mat-fab color="primary" type="submit" [disabled]="!formRegister.valid">
+            <mat-icon class="btn-submit" style="font-size:20px">&check;</mat-icon>
+          </button>
+        </form>
+
+      </mat-card>
+    </div>
+  </mat-tab>
+</mat-tab-group>

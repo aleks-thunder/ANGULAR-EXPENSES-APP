@@ -1,0 +1,55 @@
+<div class="social-links">
+  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+    <mat-icon>
+      <fa-icon [icon]="faUserCircle"></fa-icon>
+    </mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>
+      <mat-icon>
+        <fa-icon [icon]="faEnvelope" href="mailto:myMail@gmail.com"></fa-icon>
+      </mat-icon>
+      <!---->
+      <span>Mail author</span>
+    </button>
+
+    <button mat-menu-item disabled>
+      <mat-icon>
+        <fa-icon [icon]="faGit"></fa-icon>
+      </mat-icon>
+      <span>GitHub</span>
+    </button>
+
+    <button mat-menu-item>
+      <mat-icon>
+        <fa-icon [icon]="faLinkedin"></fa-icon>
+      </mat-icon>
+      <span>Linkedin</span>
+    </button>
+
+    <button mat-menu-item>
+      <mat-icon>
+        <fa-icon [icon]="faInstagram"></fa-icon>
+      </mat-icon>
+      <span>Instagram</span>
+    </button>
+
+    <button mat-menu-item>
+      <mat-icon>
+        <fa-icon [icon]="faPaperPlane"></fa-icon>
+      </mat-icon>
+      <span>Telegram</span>
+    </button>
+  </mat-menu>
+</div>
+
+
+<div class="app-settings">
+  <button mat-icon-button>
+    <mat-icon>
+      <fa-icon [icon]="faPalette" data-target="#setting-modal"></fa-icon>
+  <!---->
+
+    </mat-icon>
+  </button>
+</div>

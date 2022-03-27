@@ -1,0 +1,42 @@
+@keyframes unblur { to { -webkit-filter: blur(0); } }
+@keyframes blur { to { -webkit-filter: blur(5px); } }
+
+.mat-card {
+  width: 500px;
+  height: 1000px;
+  border-radius:50px;
+  z-index: 0;
+  background: transparent;
+}
+
+div {
+  display: flex;
+  flex-direction: column;
+  // max-width: 500px;
+}
+
+
+::ng-deep .mat-tab-body-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-position: center;
+}
+
+
+mat-form-field {
+  // width: 350px;
+  display: flex;
+  flex-direction: column;
+}
+
+.glass {
+  animation: unblur 1s 0.3s ease both;
+  filter: blur(5px);
+  float: right;
+  margin: 1.5rem;
+  border-radius: 50px;
+  box-shadow:
+    inset 0 0 8rem rgba(50,50,50,.2),
+    inset 0 0 5rem rgba(250,245,255,.3);
+}

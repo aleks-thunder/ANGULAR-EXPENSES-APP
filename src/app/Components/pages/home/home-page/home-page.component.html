@@ -1,0 +1,19 @@
+<div class="content">
+  <div class="graphic-header">
+    <h1>BUDGET TRACKER</h1>
+    <h3>February 2022</h3>
+    <h4>Balance: <span [ngClass]="{'red': totalBudget < 0, 'green': totalBudget > 0}">
+      {{ totalBudget }} $
+    </span></h4>
+  </div>
+  
+  <app-graphic></app-graphic>
+  
+  <app-categories></app-categories>
+
+  <app-input (formSubmit)="addItem($event)"></app-input>
+  
+  <app-history-list [budgetItems]="budgetItems" 
+                    (delete)="deleteItem($event)" 
+                    (update)="updateItem($event)"></app-history-list>
+</div>
