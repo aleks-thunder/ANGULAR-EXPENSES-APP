@@ -25,7 +25,8 @@ import { InputComponent } from './Components/pages/home/input/input.component';
 import { CategoriesComponent } from './Components/transactions/categories/categories.component';
 import { HistoryListComponent } from './Components/transactions/history-list/history-list.component';
 import { DashboardComponent } from './Components/pages/dashboard/dashboard.component';
-import { AuthComponent } from './Components/pages/auth/auth.component';
+import { SignUpComponent } from './Components/pages/auth/sign-up/sign-up.component';
+import { SignInComponent } from './Components/pages/auth/sign-in/sign-in.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { AuthComponent } from './Components/pages/auth/auth.component';
     InputComponent,
     CategoriesComponent,
     DashboardComponent,
-    AuthComponent,
+    SignUpComponent,
+    SignInComponent
   ],
   imports: [
     BrowserModule,

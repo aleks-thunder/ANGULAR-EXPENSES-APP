@@ -18,11 +18,11 @@ export class ReactiveFormsBuilder implements OnInit{
   });
 
   formRegister: FormGroup = this.fb.group({
-    name:      ['', [Validators.required]],
-    login:     ['', [Validators.required]],
-    email:     ['', [Validators.required]],
-    passwordVisible: ['', [Validators.required, Validators.minLength(8)]],
-    password:  ['', [Validators.required, Validators.minLength(8)]],
+    name:         ['', [Validators.required]],
+    login:        ['', [Validators.required]],
+    email:        ['', [Validators.required]],
+    password:     ['', [Validators.required, Validators.minLength(8)]],
+    passVisible:  ['', [Validators.required, Validators.minLength(8)]],
   });
 
   formInputMainPage: FormGroup = this.fb.group({
@@ -30,7 +30,7 @@ export class ReactiveFormsBuilder implements OnInit{
     category:     ['',  [Validators.required]],
     description:  ['',  [Validators.required]],
     amount:       [NaN, [Validators.required]],
-    id:           [''],
+    id:           [''], 
   });
   
   constructor( public fb: FormBuilder ) { };

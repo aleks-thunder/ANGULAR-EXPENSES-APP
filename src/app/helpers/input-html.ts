@@ -24,7 +24,7 @@ export class InputHTML {
     { label: 'name',     type:'text',     form:'name' },
     { label: 'login',    type:'text',     form:'login' },
     { label: 'password', type:'password', form:'password' },
-    { label: 'Repeat password', type:'password', form:'passwordVisible' }
+    { label: 'password2', type:'password', form:'passVisible' }
   ];
 
   constructor() { }

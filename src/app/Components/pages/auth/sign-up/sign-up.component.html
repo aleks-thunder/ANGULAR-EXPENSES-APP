@@ -1,0 +1,21 @@
+<div class="glass">
+  <mat-card>
+    <h1>It will not take a while</h1>
+
+    <form [formGroup]="formRegister" (ngSubmit)="addUser()">
+      <mat-form-field appearance="legacy" *ngFor="let item of inputReg">
+        <mat-label>{{ item.label }}</mat-label>
+
+        <!-- <input matInput type={{item.type}} formControlName={{item.form}} *ngIf="!(item.form == 'passwordVisible')"> -->
+        <input matInput type={{item.type}} formControlName={{item.form}}>
+
+      </mat-form-field>
+
+      <button mat-fab color="primary" type="submit" [disabled]="!formRegister.valid">
+        <mat-icon class="btn-submit" style="font-size:20px">&check;</mat-icon>
+      </button>
+      
+    </form>
+
+  </mat-card>
+</div>

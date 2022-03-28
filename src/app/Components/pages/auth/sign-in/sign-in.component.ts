@@ -5,20 +5,17 @@ import { InputHTML } from 'src/app/helpers/input-html';
 import { ReactiveFormsBuilder } from 'src/app/helpers/form-bilders';
 
 @Component({
-  selector: 'app-auth',
-  templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.scss']
+  selector: 'app-sign-in',
+  templateUrl: './sign-in.component.html',
+  styleUrls: ['./sign-in.component.scss']
 })
-export class AuthComponent implements OnInit{
+export class SignInComponent implements OnInit{
 
   hide = true;
   
-  
   formLogin!: FormGroup;
-  formRegister!: FormGroup;
   
   inputLog: InputInterface[] = this.InputHTML.InputLog;
-  inputReg: InputInterface[] = this.InputHTML.inputReg;
 
 
   constructor(
@@ -31,10 +28,7 @@ export class AuthComponent implements OnInit{
     
     // this.MongodbService.start();
     this.formLogin = this.ReactiveFormsBuilder.formLogin;
-    this.formRegister = this.ReactiveFormsBuilder.formRegister;
   }
 
   onLogin = () => this.ReactiveFormsBuilder.onSubmit(this.formLogin)
-  onRegister = () => this.ReactiveFormsBuilder.onSubmit(this.formRegister)
-
 }
