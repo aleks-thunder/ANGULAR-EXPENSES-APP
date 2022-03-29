@@ -19,10 +19,10 @@ export class ReactiveFormsBuilder implements OnInit{
 
   formRegister: FormGroup = this.fb.group({
     name:         ['', [Validators.required]],
-    login:        ['', [Validators.required]],
+    login:        ['', [Validators.required, Validators.minLength(4)]],
     email:        ['', [Validators.required]],
     password:     ['', [Validators.required, Validators.minLength(8)]],
-    passVisible:  ['', [Validators.required, Validators.minLength(8)]],
+    passConfirm:  ['', [Validators.required, Validators.minLength(8)]],
   });
 
   formInputMainPage: FormGroup = this.fb.group({

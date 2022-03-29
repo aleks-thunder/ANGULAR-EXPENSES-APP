@@ -15,16 +15,16 @@ export class InputHTML {
   ];
 
   InputLog: InputInterface[] = [
-    { label: 'login',    type:'text', form:'login' },
-    { label: 'password', type:'text', form:'password' }
+    { label: 'Login',    type:'text', form:'login' },
+    { label: 'Password', type:'text', form:'password' }
   ];
   
   inputReg: InputInterface[] = [
-    { label: 'email',    type:'email',    form:'email' },
-    { label: 'name',     type:'text',     form:'name' },
-    { label: 'login',    type:'text',     form:'login' },
-    { label: 'password', type:'password', form:'password' },
-    { label: 'password2', type:'password', form:'passVisible' }
+    { label: 'Name',     type:'text',     form:'name' },
+    { label: 'Login',    type:'text',     form:'login' },
+    { label: 'Email',    type:'email',    form:'email' },
+    { label: 'Password', type:'password', form:'password' },
+    { label: 'passConfirm', type:'password', form:'passConfirm' }
   ];
 
   constructor() { }

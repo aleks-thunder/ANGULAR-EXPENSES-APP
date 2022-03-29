@@ -3,6 +3,8 @@ import { FormGroup } from '@angular/forms';
 import { InputInterface } from 'src/app/interfaces/input';
 import { InputHTML } from 'src/app/helpers/input-html';
 import { ReactiveFormsBuilder } from 'src/app/helpers/form-bilders';
+import { AuthService } from 'src/app/services/http/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-in',
@@ -19,16 +21,24 @@ export class SignInComponent implements OnInit{
 
 
   constructor(
-    // public fb: FormBuilder,
+    private Auth: AuthService ,
     private InputHTML: InputHTML,
-    private ReactiveFormsBuilder: ReactiveFormsBuilder
+    private ReactiveFormsBuilder: ReactiveFormsBuilder,
+    private Router: Router
   ) { }
 
   ngOnInit(): void {
-    
     // this.MongodbService.start();
     this.formLogin = this.ReactiveFormsBuilder.formLogin;
   }
 
-  onLogin = () => this.ReactiveFormsBuilder.onSubmit(this.formLogin)
+  onLogin() {
+    this.Auth.login(this.formLogin.value).subscribe((token) => {
+      this.Router.navigate(['/'], { queryParams: { loggedin: 'success' } });
+    },
+    error => {
+       console.log(error.message);
+    });
+  }
+
 }

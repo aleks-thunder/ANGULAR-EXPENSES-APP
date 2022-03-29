@@ -4,7 +4,8 @@
   <button class="btn btn-primary m-1" routerLink="/dashboard">Dashboard</button>
   <button class="btn btn-primary m-1" routerLink="/login">Sign in</button>
   <button class="btn btn-primary m-1" routerLink="/register">Sign up</button>
-  <!-- <button class="btn btn-primary m-1" routerLink="">Logout</button> -->
+  <button class="btn btn-primary m-1" (click)="logout()">Logout</button>
+  <div class="username">Username: {{userDisplayName}}</div>
 </nav>
 
 <router-outlet></router-outlet>

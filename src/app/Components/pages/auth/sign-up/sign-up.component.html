@@ -2,7 +2,7 @@
   <mat-card>
     <h1>It will not take a while</h1>
 
-    <form [formGroup]="formRegister" (ngSubmit)="addUser()">
+    <form [formGroup]="formRegister" (ngSubmit)="onSignUp()">
       <mat-form-field appearance="legacy" *ngFor="let item of inputReg">
         <mat-label>{{ item.label }}</mat-label>
 

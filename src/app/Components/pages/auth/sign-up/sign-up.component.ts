@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+// import { FormBuilder} from '@angular/forms';
 import { InputInterface } from 'src/app/interfaces/input';
 import { InputHTML } from 'src/app/helpers/input-html';
 import { ReactiveFormsBuilder } from 'src/app/helpers/form-bilders';
-import { MongoDBService } from 'src/app/services/http/mongodb.service';
+import { AuthService } from 'src/app/services/http/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -12,42 +13,34 @@ import { MongoDBService } from 'src/app/services/http/mongodb.service';
 })
 export class SignUpComponent implements OnInit {
 
-  hide = true;
+  // ! hide = true; tb implement later
 
-  formRegister?: any;
+  formRegister!: any;
 
   inputReg: InputInterface[] = this.InputHTML.inputReg;
 
   constructor(
-    public fb: FormBuilder,
-    private Mongo: MongoDBService,
+    // public fb: FormBuilder,
+    private Auth: AuthService,
     private InputHTML: InputHTML,
-    private ReactiveFormsBuilder: ReactiveFormsBuilder
+    private ReactiveFormsBuilder: ReactiveFormsBuilder,
+    private Router: Router
   ) { }
 
   ngOnInit(): void {
     this.formRegister = this.ReactiveFormsBuilder.formRegister;
   }
 
-  addUser(): void {
-    console.log(typeof(this.formRegister));
+  onSignUp(): void {
     
-    const valueFromFrom = this.formRegister.value;
-    
-    const data = {
-      email: valueFromFrom.email,
-      name: valueFromFrom.name,
-      login: valueFromFrom.login,
-      password: valueFromFrom.password,
-    };
-
-    this.Mongo.createUser(data).subscribe(
-        response => {
-          console.log(response);
-        },
-        error => {
-          console.log(error);
-        }
+    this.Auth.register(this.formRegister.value).subscribe(response => {
+        console.log('User created:'+ JSON.stringify({response}), null);
+        this.formRegister.reset();
+        this.Router.navigate(['/login'], { queryParams: { newUserCreated: 'success' } })
+      },
+      error => {
+        console.log(error.message);
+      }
     );
   }
   
