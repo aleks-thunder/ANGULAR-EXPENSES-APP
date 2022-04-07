@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 import { NgMaterialModule } from './ng-material.module';
 
@@ -13,6 +13,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgChartsModule } from 'ng2-charts';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { SimpleNotificationsModule } from 'angular2-notifications';
 
 // components
 import { AppComponent } from './app.component';
@@ -27,6 +28,9 @@ import { HistoryListComponent } from './Components/transactions/history-list/his
 import { DashboardComponent } from './Components/pages/dashboard/dashboard.component';
 import { SignUpComponent } from './Components/pages/auth/sign-up/sign-up.component';
 import { SignInComponent } from './Components/pages/auth/sign-in/sign-in.component';
+import { NavbarComponent } from './Components/navbar/navbar.component';
+import { InterceptorService } from './services/http/interceptor.service';
+import { JwtModule } from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [
@@ -41,7 +45,8 @@ import { SignInComponent } from './Components/pages/auth/sign-in/sign-in.compone
     CategoriesComponent,
     DashboardComponent,
     SignUpComponent,
-    SignInComponent
+    SignInComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,10 +58,25 @@ import { SignInComponent } from './Components/pages/auth/sign-in/sign-in.compone
     NgChartsModule,
     BrowserAnimationsModule,
     NgbModule,
+    RouterModule,
     DragDropModule,
-    AppRoutingModule
+    AppRoutingModule,
+    SimpleNotificationsModule.forRoot(),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter:() => {
+           return localStorage.getItem('access_token'); 
+        },
+      },
+   })
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi: true
+    }
+  ],
   entryComponents: [EditItemModalComponent],
   bootstrap: [AppComponent]
 })

@@ -37,4 +37,8 @@ export class HomePageComponent implements OnInit {
     this.totalBudget += UpdateEvent.new.amount;
   }
 
+  getItems(){
+
+  }
+
 }

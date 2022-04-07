@@ -37,18 +37,10 @@ userSchema.pre('save', function (next) {
   const user = this;
 
   bcrypt.genSalt(10, function (err, salt) {
-    if (err) {
-      return res.status(422).json({
-        'error': 'There is an error while gensalt hash'
-      });
-    };
+    if (err) return res.status(422).json({ 'error': 'There is an error while genSalt' });
 
     bcrypt.hash(user.password, salt, function (err, hash) {
-      if (err) {
-        return res.status(422).json({
-          'error': 'There is an error while password hash'
-        });
-      };
+      if (err) return res.status(422).json({ 'error': 'There is an error while password hash' });
 
       user.password = hash;
       next();
@@ -56,8 +48,12 @@ userSchema.pre('save', function (next) {
   });
 });
 
-userSchema.methods.hasSamePassword = function (password) {
+userSchema.methods.comparePasswords = function (password) {
   return bcrypt.compareSync(password, this.password);
 }
 
-module.exports = mongoose.model('user-list', userSchema);
+const User = module.exports = mongoose.model('User_list', userSchema);
+
+module.exports.getUserById = function(id, callback) {
+  User.findById(id, callback);
+}

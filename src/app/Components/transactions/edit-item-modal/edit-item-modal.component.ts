@@ -25,7 +25,6 @@ export class EditItemModalComponent implements AfterViewInit {
         category:     [this.item.category],
         description:  [this.item.description],
         amount:       [this.item.amount],
-        id:           [this.item.id],
       });
     };
 

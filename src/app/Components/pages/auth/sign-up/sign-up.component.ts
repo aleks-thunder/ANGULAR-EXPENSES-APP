@@ -5,6 +5,7 @@ import { InputHTML } from 'src/app/helpers/input-html';
 import { ReactiveFormsBuilder } from 'src/app/helpers/form-bilders';
 import { AuthService } from 'src/app/services/http/auth.service';
 import { Router } from '@angular/router';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -17,30 +18,31 @@ export class SignUpComponent implements OnInit {
 
   formRegister!: any;
 
-  inputReg: InputInterface[] = this.InputHTML.inputReg;
+  inputReg: InputInterface[] = this.inputHTML.inputReg;
 
   constructor(
-    // public fb: FormBuilder,
-    private Auth: AuthService,
-    private InputHTML: InputHTML,
-    private ReactiveFormsBuilder: ReactiveFormsBuilder,
-    private Router: Router
+    private auth: AuthService,
+    private inputHTML: InputHTML,
+    private reactiveFormsBuilder: ReactiveFormsBuilder,
+    private router: Router,
+    private notification: NotificationService
   ) { }
 
   ngOnInit(): void {
-    this.formRegister = this.ReactiveFormsBuilder.formRegister;
+    this.formRegister = this.reactiveFormsBuilder.formRegister;
+  
   }
 
   onSignUp(): void {
-    
-    this.Auth.register(this.formRegister.value).subscribe(response => {
-        console.log('User created:'+ JSON.stringify({response}), null);
-        this.formRegister.reset();
-        this.Router.navigate(['/login'], { queryParams: { newUserCreated: 'success' } })
-      },
-      error => {
-        console.log(error.message);
-      }
+    this.auth.register(this.formRegister.value).subscribe(data => {
+      this.notification.msgSuccess('Registration','Account successfule created!');
+      this.formRegister.reset();
+      this.router.navigate(['/login']);
+    },
+    error => {
+      this.notification.msgError('Registration',error.error.error);
+      console.log(error);
+    }
     );
   }
   

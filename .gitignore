@@ -1,9 +1,12 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+
+
 #pattern
 src/app/Components/pages/auth/html
 src/app/Components/pages/auth/style
-mongoose
+copy
+
 # Compiled output
 /dist
 /tmp

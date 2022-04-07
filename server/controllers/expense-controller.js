@@ -1,39 +1,27 @@
-const userSchema = require('../models/user-model');
-const config = require('../config/create-user.config');
+const expenseSchema = require('../models/expense-model');
 
-// Create and Save a new User
-exports.createUser = (req, res) => {
 
-  // Get user data from app/register page
-  const { name, login, email, password, passConfirm } = req.body
+exports.createExpense = (req, res) => {
+  const user_id = req.user._id;
 
-  // Save User in the database after checks
-  if (!name || !login || !email || !password) {
-    return res.status(422).json({ 'error': 'One of the input fields is empty' });
-  };
-  if (password !== passConfirm) {
-    return res.status(422).json({ 'error': 'Password does not match' });
-  };
+  const { date, category, description, amount } = req.body
 
-  // Check if login/email already exist
-  userSchema.findOne({ $or: [{'email': email}, {'login': login}] }, function (err, existingUser) {
+  const expense = new expenseSchema({ user_id, date, category, description, amount });
+  expense.save(function (err) {
     if (err) {
-      return res.status(422).json({ 'error': 'err on exist:' + err });
+      return res.status(422).json({ 'error': 'Can not create an expense' + err });
     }
-    if (existingUser) {
-      return res.status(422).json({ 'error': `this email or login already in use!` });
-    }
-    else {
-      
-      // Create User
-      const user = new userSchema({ name, login, email, password });
-      user.save(function (err) {
-        if (err) {
-          return res.status(422).json({'error': 'err RegUser:' + err });
-        }
-        return res.status(200).json({ 'registered': true });
-      });
-    };
+    return res.status(200).json({ 'expense submitted': true });
   });
 
 }
+
+exports.getExpenses = (req, res) => {
+  const user_id = req.user._id;
+
+  expenseSchema.find({user_id})
+  .then((userExpenses) => {
+    res.send(userExpenses)
+  })
+  .catch((e) => res.send(e));
+} 

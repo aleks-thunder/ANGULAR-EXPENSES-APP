@@ -1,14 +1,17 @@
-<div  class="expense-row row mx-1" 
-      (click)="onCardClick()" 
-      [ngClass]="{ 'receipt': item.amount >= 0, 'expense': item.amount < 0 }">
+<div 
+  class="expense-row row mx-1" 
+  *ngFor="let exp of expenseList"  
+  (click)="onCardClick()"
+  [ngClass]="{ 'receipt': exp.amount >= 0, 'expense': exp.amount < 0 }"
+  >
 
-    <div class="expense-date col-2 border">                {{ item.date | date:'MMM d, y' }}</div>
-    <div class="expense-category col-2 border">            {{ item.category }}</div>
-    <div class="expense-description col-5 border">         {{ item.description }}</div>
-    <div class="expense-amount col-2 border">              {{ item.amount }} $</div>
-    <div class="expense-id" style="display: none;"> {{ item.id }}</div>
-    <button class="btn-delete col-1" (click)="onDelBtnClick()">x</button>
-  
+  <div class="expense-date col-2 border">         {{ exp.date | date:'MMM d, y' }}</div>
+  <div class="expense-category col-2 border">     {{ exp.category }}</div>
+  <div class="expense-category col-2 border">     {{ exp.category }}</div>
+  <div class="expense-description col-5 border">  {{ exp.description }}</div>
+  <div class="expense-amount col-2 border">       {{ exp.amount }} $</div>
+  <div class="expense-id">                      {{ exp.id }}</div>
+  <!-- <div class="expense-id" style="display: none;"> {{ exp.id }}</div> -->
+  <button class="btn-delete col-1" (click)="onDelBtnClick()">x</button>
+
 </div>
-
-

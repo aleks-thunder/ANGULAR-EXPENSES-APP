@@ -5,7 +5,6 @@ export class BudgetItem  {
     public category: string,
     public description: string, 
     public amount: number, 
-    public id:string 
   ){ };
   
 }

@@ -2,7 +2,6 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatChip } from '@angular/material/chips';
 import { CategoryInterface } from 'src/app/interfaces/category';
 import { CategoryService } from 'src/app/services/category.service';
-import { InputCategoryService } from 'src/app/services/input-category.service';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 
@@ -23,7 +22,6 @@ export class CategoriesComponent implements OnInit {
   };
 
   constructor(
-    private InputCategoryService: InputCategoryService,
     private categoryService: CategoryService
     ) {}
 
@@ -41,7 +39,7 @@ export class CategoriesComponent implements OnInit {
   
   chipSelection(chip: MatChip, name: string) {
     chip.select();
-    this.InputCategoryService.setCategoriesValue(name);
+    this.categoryService.setCategoriesForInput(name);
   };
 
 }

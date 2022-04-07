@@ -1,58 +1,62 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { CreateUser } from 'src/app/models/create-user';
-import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import * as moment from 'moment';
+import { environment } from '../../../environments/environment'
 
-const jwt = new JwtHelperService();
-
-class SessionToken {
-  exp!: number;
-  username!: string;
-}
+const ENV = environment;
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private baseUrl = 'http://localhost:3000/api';
-  private sessionToken: SessionToken;
+  authToken: any;
+  user: any;
 
-  constructor(private http: HttpClient) {
-    this.sessionToken = JSON.parse(localStorage.getItem('auth_meta')!) || new SessionToken();
+  constructor(
+    private http: HttpClient,
+    public jwtHelper: JwtHelperService
+  ) { }
+
+  register(user: any): Observable<any> {
+    return this.http.post(`${ENV.API_BASE_URL}/register`, user)
+      .pipe(map((res: any) => res));
   }
 
-  public register(data: CreateUser): Observable<CreateUser> {
-    return this.http.post(this.baseUrl + '/register', data);
+  login(user: any): Observable<any> {
+    return this.http.post(`${ENV.API_BASE_URL}/login`, user)
+      .pipe(map((res: any) => res));
   }
 
-  public login(data: CreateUser): Observable<CreateUser> {
-    localStorage.setItem('loggedUser', data.login!);
-    
-    return this.http.post(this.baseUrl+'/login', data).pipe(map(token => {
-      return this.saveToken(token);
-    }));
+  // getProfile() {
+  //   return this.http.get(ENV.API_BASE_URL + 'dashboard')
+  //     .pipe(map((res: any) => res));
+  // }
+
+  storeUserData(token: any, user: any) {
+    localStorage.setItem('access_token', token);
+    localStorage.setItem('user', JSON.stringify(user));
+    this.authToken = token;
+    this.user = user;
   }
 
-  public logout(): void {
-    localStorage.removeItem('auth_tkn');
-    localStorage.removeItem('auth_meta');
-    localStorage.removeItem('loggedUser');
-
-    this.sessionToken = new SessionToken();
+  loadToken() {
+    const token = localStorage.getItem('access_token');
+    this.authToken = token;
+    return this.authToken
   }
 
-  public isAuthenticated(): boolean {
-    return moment().isBefore(moment.unix(this.sessionToken.exp));
+  logout() {
+    this.authToken = null;
+    this.user = null;
+    localStorage.clear();
   }
 
-  private saveToken(token: any): any {
-    this.sessionToken = jwt.decodeToken(token);
-    localStorage.setItem('auth_tkn', token);
-    localStorage.setItem('auth_meta', JSON.stringify(this.sessionToken));
-    return token;
+  isAuthenticated(): boolean {
+    return !this.jwtHelper.isTokenExpired(this.loadToken());
   }
 }
+
+// 17:54  

@@ -5,6 +5,7 @@ import { InputHTML } from 'src/app/helpers/input-html';
 import { ReactiveFormsBuilder } from 'src/app/helpers/form-bilders';
 import { AuthService } from 'src/app/services/http/auth.service';
 import { Router } from '@angular/router';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -17,28 +18,33 @@ export class SignInComponent implements OnInit{
   
   formLogin!: FormGroup;
   
-  inputLog: InputInterface[] = this.InputHTML.InputLog;
+  inputLog: InputInterface[] = this.inputHTML.InputLog;
 
 
   constructor(
-    private Auth: AuthService ,
-    private InputHTML: InputHTML,
-    private ReactiveFormsBuilder: ReactiveFormsBuilder,
-    private Router: Router
+    private auth: AuthService ,
+    private inputHTML: InputHTML,
+    private reactiveFormsBuilder: ReactiveFormsBuilder,
+    private router: Router,
+    private notification: NotificationService
+
   ) { }
 
   ngOnInit(): void {
-    // this.MongodbService.start();
-    this.formLogin = this.ReactiveFormsBuilder.formLogin;
+    this.formLogin = this.reactiveFormsBuilder.formLogin;
   }
 
   onLogin() {
-    this.Auth.login(this.formLogin.value).subscribe((token) => {
-      this.Router.navigate(['/'], { queryParams: { loggedin: 'success' } });
+    this.auth.login(this.formLogin.value  ).subscribe(data => {
+      this.auth.storeUserData(data.token, data.user);
+      this.notification.msgSuccess('Login', 'Are are logged in !');
+      this.router.navigate(['/'])
     },
     error => {
-       console.log(error.message);
-    });
+      this.notification.msgError('Registration',error.error.error);
+      console.log(error);
+    }
+    );
   }
 
 }

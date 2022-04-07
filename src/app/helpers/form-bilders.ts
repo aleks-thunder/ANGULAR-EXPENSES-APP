@@ -29,8 +29,7 @@ export class ReactiveFormsBuilder implements OnInit{
     date:         [new Date().toISOString()],
     category:     ['',  [Validators.required]],
     description:  ['',  [Validators.required]],
-    amount:       [NaN, [Validators.required]],
-    id:           [''], 
+    amount:       [NaN, [Validators.required]]
   });
   
   constructor( public fb: FormBuilder ) { };

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { CategoryInterface } from 'src/app/interfaces/category';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,13 @@ export class CategoryService {
     { name: 'Investments'},
   ];
 
-  constructor() { };
+  categoriesValue = new BehaviorSubject('');
+  
+  constructor() { }
+
+  setCategoriesForInput(value: string) {
+    this.categoriesValue.next(value);
+  }
 
   getCategory(): any {
     return [this.categories];
