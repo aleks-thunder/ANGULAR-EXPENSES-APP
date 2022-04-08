@@ -1,0 +1,28 @@
+<div 
+  class="expense-row glass" 
+  *ngFor="let exp of expenseList"  
+  [ngClass]="{ 'receipt': exp.amount >= 0, 'expense': exp.amount < 0 }"
+  >
+  <div class="col-2">            {{ exp.date | date:'MMM d, y' }}</div>
+  <div class="col-2 border-left">{{ exp.category }}</div>
+  <div class="col-1 border-left">{{ exp.amount }} $</div>
+  <div class="col-5 border-left">{{ exp.description }}</div>
+
+  <div class="btns">
+    <button 
+      class="btn-edit mx-1" 
+      mat-mini-fab 
+      color="primary" 
+      (click)="onEditBtn(exp)">
+      <fa-icon [icon]="faPenSquare"></fa-icon>
+    </button>
+
+    <button 
+      class="btn-delete mx-1" 
+      mat-mini-fab 
+      color="warn" 
+      (click)="onDelBtn(exp)">
+      <fa-icon [icon]="faTrash"></fa-icon>
+    </button>
+  </div>
+</div>

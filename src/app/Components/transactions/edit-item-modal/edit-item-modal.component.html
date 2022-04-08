@@ -1,4 +1,30 @@
-<h1 class="title">Edit expense</h1>
-<app-categories></app-categories>
-<app-input [item]="item" (formSubmit)="onSubmitted($event)"></app-input>
-<!-- <app-expense-row [item]="item"></app-expense-row> -->
+<div class="dialog">
+  <h1 class="title">Edit expense</h1>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Date </mat-label>
+    <input matInput [matDatepicker]="datePicker" placeholder="Placeholder"  [(ngModel)]="expense.date">
+    <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+    <mat-datepicker #datePicker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Category</mat-label>
+    <mat-select>
+      <mat-option value="option">"{{expense.category}}"</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Description</mat-label>
+    <input matInput placeholder="Placeholder" [(ngModel)]="expense.description">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Amount</mat-label>
+    <input matInput placeholder="Placeholder" [(ngModel)]="expense.amount">
+  </mat-form-field>
+
+  <button class="btn btn-success save" (click)="onSave(expense)">Save</button>
+  <button class="btn btn-danger cancel">Cancel</button>
+</div>

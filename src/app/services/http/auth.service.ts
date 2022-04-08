@@ -20,43 +20,36 @@ export class AuthService {
     public jwtHelper: JwtHelperService
   ) { }
 
-  register(user: any): Observable<any> {
+  public register(user: any): Observable<any> {
     return this.http.post(`${ENV.API_BASE_URL}/register`, user)
       .pipe(map((res: any) => res));
   }
 
-  login(user: any): Observable<any> {
+  public login(user: any): Observable<any> {
     return this.http.post(`${ENV.API_BASE_URL}/login`, user)
       .pipe(map((res: any) => res));
   }
 
-  // getProfile() {
-  //   return this.http.get(ENV.API_BASE_URL + 'dashboard')
-  //     .pipe(map((res: any) => res));
-  // }
-
-  storeUserData(token: any, user: any) {
+  public storeUserData(token: any, user: any) {
     localStorage.setItem('access_token', token);
     localStorage.setItem('user', JSON.stringify(user));
     this.authToken = token;
     this.user = user;
   }
 
-  loadToken() {
-    const token = localStorage.getItem('access_token');
-    this.authToken = token;
-    return this.authToken
-  }
-
-  logout() {
+  public logout() {
     this.authToken = null;
     this.user = null;
     localStorage.clear();
   }
 
-  isAuthenticated(): boolean {
-    return !this.jwtHelper.isTokenExpired(this.loadToken());
+  public isAuthenticated(): boolean {
+    return !this.jwtHelper.isTokenExpired(this.getToken());
+  }
+
+  private getToken() {
+    const token = localStorage.getItem('access_token');
+    this.authToken = token;
+    return this.authToken
   }
 }
-
-// 17:54  

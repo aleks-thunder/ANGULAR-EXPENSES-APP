@@ -1,0 +1,53 @@
+.receipt {
+  color: green;
+}
+
+.expense {
+  color: red;
+}
+
+.border-left {
+  border-left: solid 1px grey !important;
+  line-height: 50px;
+  padding-left: 10px;
+  margin-left: -5px;
+}
+
+.glass {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 1800px;
+  height: 50px;
+  margin: 6px auto ;
+  padding: 0 15px 0 10px;
+  border-radius: 10px;
+  font-size: 20px;
+  box-shadow:
+    inset 0 0 8rem rgba(50,50,50,.1),
+    inset 0 0 5rem rgb(255, 229, 84);
+  transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+
+    .btns{
+      position: relative;
+      right: -200px;
+      opacity: 0;
+      transition: all 0.3s ease-out;
+    }
+
+    &:hover {
+      transform: scaleX(1.02) scaleY(1.2);
+      box-shadow:
+      inset 0 0 8rem rgba(50,50,50,.1),
+      inset 0 0 5rem gold;
+      .btns{
+        transform: scaleY(.9);
+        opacity: 1;
+      }
+    }
+
+    &:hover:before {
+      content: ' ';
+      transform: scaleX(0) scaleY(0.7);
+    }
+}

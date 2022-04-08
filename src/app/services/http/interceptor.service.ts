@@ -21,22 +21,6 @@ export class InterceptorService implements HttpInterceptor{
     } else {
       return next.handle(req);
     }
-    // req = req.clone({
-    //   url: req.url,
-    //   setHeaders: this.auth.isAuthenticated() ? {
-    //     Authorization: this.auth.loadToken()
-    //   } : {}
-    // });
-    // return next.handle(req).pipe(
-    //   catchError(err => {
-    //     if (err.status === 401 || err.status === 403) {
-    //       // localStorage.clear();
-    //       // sessionStorage.clear();
-    //     }
-    //     return throwError(err);
-    //   }
-    //   )
-    // );
   }
 
 }

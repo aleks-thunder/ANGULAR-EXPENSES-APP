@@ -11,10 +11,6 @@
 
   <app-categories></app-categories>
 
-  <app-input (formSubmit)="addItem($event)"></app-input>
+  <app-input></app-input>
 
-  <app-history-list [budgetItems]="budgetItems" (delete)="deleteItem($event)" (update)="updateItem($event)">
-  </app-history-list>
-
-  <button (click)="getItems()"></button>
 </div>

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ExpenseItem } from 'src/app/interfaces/expense-item';
 import { environment } from '../../../environments/environment'
+import { map } from 'rxjs/operators';
 
 const ENV = environment;
 @Injectable({
@@ -16,12 +17,19 @@ export class ExpenseService {
     ) {
   }
 
-  public pushExpenseToDB(data: ExpenseItem): Observable<ExpenseItem> {
+  public addExpense(data: ExpenseItem): Observable<ExpenseItem> {
     return this.http.post(ENV.API_BASE_URL, data);
   }
 
-  public getExpenseFromDB(): Observable<ExpenseItem> {
+  public getExpense(): Observable<ExpenseItem> {
     return this.http.get(`${ENV.API_BASE_URL}/dashboard`)
   }
 
+  public updateExpense(item: ExpenseItem): Observable<ExpenseItem> {
+    return this.http.put(`${ENV.API_BASE_URL}/dashboard/${item._id}`, item).pipe(map((res: any) => res));
+  }
+
+  public deleteExpense(item: ExpenseItem): Observable<ExpenseItem> {
+    return this.http.delete(`${ENV.API_BASE_URL}/dashboard/${item._id}`).pipe(map((res: any) => res));
+  }
 }

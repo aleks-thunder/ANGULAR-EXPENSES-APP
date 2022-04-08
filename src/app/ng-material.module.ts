@@ -11,7 +11,8 @@ import { MatDialogModule } from '@angular/material/dialog'
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import {MatTabsModule} from '@angular/material/tabs';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatSelectModule } from '@angular/material/select';
 
 const MaterialComponents = [
   MatButtonModule,
@@ -25,7 +26,8 @@ const MaterialComponents = [
   MatCardModule,
   MatChipsModule,
   MatProgressBarModule,
-  MatTabsModule
+  MatTabsModule,
+  MatSelectModule
 ]
 
 @NgModule({

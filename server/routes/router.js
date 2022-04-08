@@ -1,19 +1,24 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
-const { createUser, login } = require('../controllers/user-controller');
+const user = require('../controllers/user-controller');
 const expense = require('../controllers/expense-controller');
 
-// Register
-router.post('/register', createUser);
+/** USER ROUTER */
+router.post('/register', user.createUser);
 
-// Auth
-router.post('/login', login);
+router.post('/login', user.login);
 
-// Create an expense
+/** EXPENSE ROUTER */
 router.post('/', passport.authenticate('jwt', {session: false}), expense.createExpense);
 
-// Get expenses
 router.get('/dashboard', passport.authenticate('jwt', {session: false}), expense.getExpenses);
+
+router.put('/dashboard/:id', passport.authenticate('jwt', {session: false}), expense.updateExpenses);
+
+router.delete('/dashboard/:id', passport.authenticate('jwt', {session: false}), expense.deleteExpenses);
+
+
+/** CATEGORIES ROUTER */
 
 module.exports = router;
