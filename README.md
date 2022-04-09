@@ -11,5 +11,5 @@ Node: 16.14.0.
 
 Switch on MongoDB.
 Run `ng serve` \ `ng s` for angular server. Navigate to `http://localhost:4200/`.
-Run `npm run server` \ `npm run s` for node server. Navigate to `http://localhost:3000/`. 
+Run `npm run server` \ `npm run s` for backend server. 
 Enjoy.

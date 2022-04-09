@@ -1,4 +1,4 @@
-const expenseSchema = require('../models/expense-model');
+const expenseSchema = require('../models/expense.model');
 
 
 exports.createExpense = (req, res) => {

@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const expenseSchema = new Schema({
+const categoriesSchema = new Schema({
   
   user_id: String,
   category:     { type: String, unique: true, required: 'Caregory is required' },
@@ -12,4 +12,4 @@ const expenseSchema = new Schema({
 }, { timestamps: true });
 
 
-module.exports = mongoose.model('expense', expenseSchema);
+module.exports = mongoose.model('Categories', categoriesSchema);

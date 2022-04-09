@@ -1,6 +1,6 @@
 <div class="glass">
   <mat-card>
-    <h1>It will not take a while</h1>
+    <h1>Quick registration</h1>
 
     <form [formGroup]="formRegister" (ngSubmit)="onSignUp()">
       <mat-form-field appearance="legacy" *ngFor="let item of inputReg">
@@ -11,8 +11,13 @@
 
       </mat-form-field>
 
-      <button mat-fab color="primary" type="submit" [disabled]="!formRegister.valid">
-        <mat-icon class="btn-submit" style="font-size:20px">&check;</mat-icon>
+      <button 
+        mat-raised-button 
+        color="primary" 
+        class="btn-submit" 
+        type="submit" 
+        [disabled]="!formRegister.valid"
+        >Register &check;
       </button>
       
     </form>
