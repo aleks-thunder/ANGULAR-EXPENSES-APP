@@ -3,7 +3,7 @@ const router = express.Router();
 const passport = require('passport');
 const user = require('../controllers/user.controller');
 const expense = require('../controllers/expense.controller');
-// const categories = require('../controllers/categories.controller');
+const categories = require('../controllers/categories.controller');
 
 /** USER ROUTER */
 router.post('/register', user.createUser);
@@ -21,8 +21,8 @@ router.delete('/dashboard/:id', passport.authenticate('jwt', {session: false}), 
 
 
 /** CATEGORIES ROUTER */
-// router.post('/', passport.authenticate('jwt', {session: false}), expense.createExpense);
+router.post('/categories', passport.authenticate('jwt', {session: false}), categories.saveCategories);
 
-// router.get('/', passport.authenticate('jwt', {session: false}), expense.createExpense);
+router.get('/categories', passport.authenticate('jwt', {session: false}), categories.getCategories);
 
 module.exports = router;

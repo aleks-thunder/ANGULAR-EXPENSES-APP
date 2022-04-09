@@ -8,11 +8,11 @@ import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/materia
 import { InputInterface } from 'src/app/interfaces/input';
 import { InputHTML} from 'src/app/helpers/input-html';
 import { ReactiveFormsBuilder } from 'src/app/helpers/form-bilders';
-import { CategoryService } from 'src/app/services/category.service';
 
 import { ExpenseItem } from 'src/app/interfaces/expense-item';
 import { ExpenseService } from 'src/app/services/http/expense.service';
 import { NotificationService } from 'src/app/services/notification.service';
+import { CategoryInputHelper } from 'src/app/helpers/category-input-helper';
 
 const dateFormat = { display: { dateInput: 'll', monthYearLabel: 'MMMM YYYY' } };
 
@@ -47,7 +47,7 @@ export class InputComponent implements OnInit {
   constructor(
     public fb: FormBuilder,
     private inputHTML: InputHTML,
-    private categoryService: CategoryService,
+    private categoryInputHelper: CategoryInputHelper,
     private reactiveFormsBuilder: ReactiveFormsBuilder,
     private expenseService: ExpenseService,
     private notification: NotificationService
@@ -55,7 +55,7 @@ export class InputComponent implements OnInit {
 
   ngOnInit(): void {
     this.reactiveForm = this.reactiveFormsBuilder.formInputMainPage;
-    this.categoryService.categoriesValue.subscribe(x => this.reactiveForm.get('category')?.setValue(x));
+    this.categoryInputHelper.categoriesValue.subscribe(x => this.reactiveForm.get('category')?.setValue(x));
   }
 
   onSubmit() {

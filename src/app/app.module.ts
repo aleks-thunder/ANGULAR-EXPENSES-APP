@@ -24,7 +24,6 @@ import { HomePageComponent } from './Components/pages/home/home-page/home-page.c
 import { EditItemModalComponent } from './Components/transactions/edit-item-modal/edit-item-modal.component';
 import { InputComponent } from './Components/pages/home/input/input.component';
 import { CategoriesComponent } from './Components/transactions/categories/categories.component';
-// import { HistoryListComponent } from './Components/transactions/history-list/history-list.component';
 import { DashboardComponent } from './Components/pages/dashboard/dashboard.component';
 import { SignUpComponent } from './Components/pages/auth/sign-up/sign-up.component';
 import { SignInComponent } from './Components/pages/auth/sign-in/sign-in.component';
@@ -37,7 +36,6 @@ import { JwtModule } from '@auth0/angular-jwt';
     AppComponent,
     GraphicComponent,
     BottomLinksComponent,
-    // HistoryListComponent,
     ExpenseRowComponent,
     HomePageComponent,
     EditItemModalComponent,

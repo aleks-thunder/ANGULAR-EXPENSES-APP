@@ -4,12 +4,8 @@ const Schema = mongoose.Schema;
 const categoriesSchema = new Schema({
   
   user_id: String,
-  category:     { type: String, unique: true, required: 'Caregory is required' },
-  description:  { type: String, unique: true, required: 'Description is required' },
-  amount:       { type: String, unique: true, required: 'Amount is required' },
-  date:         { type: Date,   unique: true, required: 'Date is required' }
+  categories: []
 
-}, { timestamps: true });
+});
 
-
-module.exports = mongoose.model('Categories', categoriesSchema);
+module.exports = mongoose.model('Category', categoriesSchema);

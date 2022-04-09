@@ -24,7 +24,7 @@ export class InputHTML {
     { label: 'Login',    type:'text',     form:'login' },
     { label: 'Email',    type:'email',    form:'email' },
     { label: 'Password', type:'password', form:'password' },
-    { label: 'passConfirm', type:'password', form:'passConfirm' }
+    { label: 'Confirmation', type:'password', form:'passConfirm' }
   ];
 
   constructor() { }

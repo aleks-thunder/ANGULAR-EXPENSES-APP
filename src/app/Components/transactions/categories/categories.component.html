@@ -1,13 +1,14 @@
 <div class="d-flex flex-row mt-1 mb-3">
 
   <mat-card class="pb-4">
-    <mat-card-header>
-      <mat-progress-bar class="expense-progress-bar" mode="buffer"></mat-progress-bar>
-    </mat-card-header>
+
     <mat-card-title>Categories</mat-card-title>
     <mat-card-subtitle>Drag & drop to change order list</mat-card-subtitle>
     <mat-card-content>
-
+      <input  placeholder="Add category..." 
+      [matChipInputFor]="chipList"
+      (matChipInputTokenEnd)="addCategory($event)"
+      >
       <mat-chip-list  #contenedor 
                       #chipList 
                       cdkDropListGroup
@@ -21,7 +22,7 @@
                 >
             <div cdkDrag>
               <div *cdkDragPlaceholder></div>
-              <mat-chip #toggle="matChip" 
+              <mat-chip id="hi" #hi #toggle="matChip" 
                         (click)="chipSelection(toggle, category.name)" 
                         color="warn"
                         (removed)="removeCategory(category)"
@@ -35,15 +36,12 @@
             </div>
           </div>
         </ng-container>
-        <input  placeholder="Add category..." 
-                [matChipInputFor]="chipList"
-                (matChipInputTokenEnd)="addCategory($event)"
-                >
+
       </mat-chip-list>
-      <button>save categories</button>
+      <button mat-raised-button color="primary" class="btn-save" (click)="onSaveCategories(categories)">save categories</button>
     </mat-card-content>
     <mat-card-footer>
-      <mat-progress-bar class="receipt-progress-bar" mode="buffer"></mat-progress-bar>
+      <mat-progress-bar class="expense-progress-bar" color="accent" mode="query"></mat-progress-bar>
     </mat-card-footer>
 
   </mat-card>
