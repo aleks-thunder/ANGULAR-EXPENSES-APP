@@ -26,25 +26,28 @@ export class CategoriesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void { 
-    this.categoryService.getCategories().subscribe((res: any) => {
-
-    if( Array.isArray(res) && res.length) {
-      this.categories = [];
-      res.forEach((x:any) => this.categories.push({'name': x}))
-      
-    } else {
-      this.categories = [
-        { name: 'Salary'},
-        { name: 'Debt'},
-        { name: 'Credit'},
-        { name: 'Investments'},
-      ]; 
-    }
-    }, err => {
-      console.log(err);
-    })
+    this.getCategories();
   };
+  
+  getCategories() {
+    this.categoryService.getCategories().subscribe((res: any) => {
+      
+      if( Array.isArray(res) && res.length) {
+        this.categories = [];
+        res.forEach((categoryName: string) => this.categories.push({'name': categoryName}))
 
+      } else {
+        this.categories = [
+          { name: 'Salary'},
+          { name: 'Debt'},
+          { name: 'Credit'},
+          { name: 'Investments'},
+        ]; 
+      };
+
+      }, err => console.log(err)
+    );
+  }
   onSaveCategories(categories: any) {
     let serverObject :any = [];
     
@@ -62,13 +65,13 @@ export class CategoriesComponent implements OnInit {
 
   addCategory(event: MatChipInputEvent): void {
     const value: string = event.value;
-    this.categories.push({ name: value })
+    this.categories.push({ name: value });
     event.chipInput!.clear();
   };
 
   removeCategory(category: CategoryInterface): void {
     const index: number = this.categories.indexOf(category);
-    this.categories.splice(index, 1)
+    this.categories.splice(index, 1);
   };
 
   dragCategory(event: CdkDragDrop<any>) {

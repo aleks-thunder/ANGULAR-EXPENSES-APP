@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 
@@ -39,30 +39,29 @@ export class InputComponent implements OnInit {
   
   categories: string = '';
   
-  reactiveForm!: FormGroup;
+  inputForm!: FormGroup;
   
   htmlInput:InputInterface[] = this.inputHTML.inputComponent
 
     
   constructor(
-    public fb: FormBuilder,
     private inputHTML: InputHTML,
-    private categoryInputHelper: CategoryInputHelper,
     private reactiveFormsBuilder: ReactiveFormsBuilder,
-    private expenseService: ExpenseService,
-    private notification: NotificationService
+    private categoryInputHelper: CategoryInputHelper,
+    private notification: NotificationService,
+    private expenseService: ExpenseService
   ) { }
 
   ngOnInit(): void {
-    this.reactiveForm = this.reactiveFormsBuilder.formInputMainPage;
-    this.categoryInputHelper.categoriesValue.subscribe(x => this.reactiveForm.get('category')?.setValue(x));
+    this.inputForm = this.reactiveFormsBuilder.formInputMainPage;
+    this.categoryInputHelper.categoriesInput.subscribe(x => this.inputForm.get('category')?.setValue(x));
   }
 
   onSubmit() {
-    this.expenseService.addExpense(this.reactiveForm.value).subscribe((response: ExpenseItem) => {
+    this.expenseService.addExpense(this.inputForm.value).subscribe((response: ExpenseItem) => {
       this.notification.msgSuccess('Expense','Expense created !');
-      this.reactiveForm.controls['description'].reset();
-      this.reactiveForm.controls['amount'].reset();
+      this.inputForm.controls['description'].reset();
+      this.inputForm.controls['amount'].reset();
     },
     error => {
       this.notification.msgError('Expense',error.error.error)

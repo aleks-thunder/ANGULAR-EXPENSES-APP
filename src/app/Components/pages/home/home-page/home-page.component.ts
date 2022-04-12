@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Budget } from 'src/app/helpers/budget';
 
 @Component({
   selector: 'app-home-page',
@@ -7,11 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePageComponent implements OnInit {
 
-  totalBudget: number = 0;
+  currentBalance: number = 0;
 
-  constructor() { }
+  constructor(private budget:Budget) { }
 
   ngOnInit(): void {
+    this.budget.getAllExpenses();
+    
+    setTimeout(() => {
+      this.budget.getCurrentBalance();
+      this.currentBalance = this.budget.currentBalance;
+    }, 500);
+
+    
   }
 
 }

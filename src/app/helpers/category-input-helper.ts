@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { CategoryInterface } from '../interfaces/category';
 
 @Injectable({
   providedIn: 'root'
@@ -7,12 +8,16 @@ import { BehaviorSubject } from 'rxjs';
 
 export class CategoryInputHelper {
 
-  categoriesValue = new BehaviorSubject('');
-  
+  categoriesInput = new BehaviorSubject('');
+  // categoriesGet: Subject<CategoryInterface> = new BehaviorSubject<CategoryInterface>({});
+
   constructor() { }
 
-  setCategoriesForInput(value: string) {
-    this.categoriesValue.next(value);
+  setCategoriesForInput(name: string) {
+    this.categoriesInput.next(name);
   }
   
+  // getCategories(category: CategoryInterface) {
+  //   this.categoriesGet.next(category);
+  // }
 }

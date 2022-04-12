@@ -25,8 +25,8 @@ export class ExpenseService {
     return this.http.get(`${ENV.API_BASE_URL}/dashboard`)
   }
 
-  public updateExpense(item: ExpenseItem): Observable<ExpenseItem> {
-    return this.http.put(`${ENV.API_BASE_URL}/dashboard/${item._id}`, item).pipe(map((res: any) => res));
+  public updateExpense(itemId: any, item: ExpenseItem): Observable<ExpenseItem> {
+    return this.http.put(`${ENV.API_BASE_URL}/dashboard/${itemId}`, item).pipe(map((res: any) => res));
   }
 
   public deleteExpense(item: ExpenseItem): Observable<ExpenseItem> {

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 
@@ -22,10 +22,9 @@ export class ExpenseRowComponent implements OnInit {
   expenseList?: any;
   faTrash = faTrash;
   faPenSquare = faPenSquare;
-  // @Input()  item!: ExpenseItem;
 
   constructor(
-    public dialog: MatDialog,
+    public  dialog: MatDialog,
     private expenseService: ExpenseService,
     private router: Router,
     private notification: NotificationService
@@ -37,11 +36,8 @@ export class ExpenseRowComponent implements OnInit {
 
   
   getExpenses() {
-    this.expenseService.getExpense().subscribe((expenseList: ExpenseItem ) => {
-      this.expenseList = expenseList;
-    }, error => {
-      console.log(error);
-    });
+    this.expenseService.getExpense().subscribe((getExpense: ExpenseItem ) => this.expenseList = getExpense,
+       error => console.log(error));
   }
 
 
@@ -49,8 +45,8 @@ export class ExpenseRowComponent implements OnInit {
     this.router.navigate(['/dashboard', item._id]);
 
     const dialogRef = this.dialog.open(EditItemModalComponent, {
-      width: '1200px',
-      height: '400px',
+      width: '500px',
+      height: '650px',
       data: item
     });
   }
@@ -61,10 +57,8 @@ export class ExpenseRowComponent implements OnInit {
     this.expenseService.deleteExpense(item).subscribe(() => {
       this.notification.msgSuccess('Expense','Expense deleted');
     },
-    error => {
-      this.notification.msgError('Expense',error.error.error);
-      console.log(error);
-    })
-    }
+    error => this.notification.msgError('Expense',error.error.error))
 
+    window.location.reload();
+  }
 }

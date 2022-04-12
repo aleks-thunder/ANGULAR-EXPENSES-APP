@@ -12,11 +12,11 @@ module.exports = function(passport) {
   passport.use(new JwtStrategy(opts, (jwt_payload, done) => {
     User.getUserById(jwt_payload._id, (err, user) => {
 
-      if(err) return done(err, false);
+      if(err) done(err, false);
 
-      if(user) return done(null, user);
+      if(user) done(null, user);
 
-      else return done(null, false);
+      else done(null, false);
 
     });
   }));

@@ -9,12 +9,9 @@ import { Injectable } from '@angular/core';
 
 export class ReactiveFormsBuilder implements OnInit{
 
-  @Output() formSubmit: EventEmitter<any> = new EventEmitter<any>();
-
-
   formLogin: FormGroup = this.fb.group({
-    login:    ['', [Validators.required]],
-    password: ['', [Validators.required]]
+    login:    ['', [Validators.required, Validators.minLength(4)]],
+    password: ['', [Validators.required, Validators.minLength(8)]]
   });
 
   formRegister: FormGroup = this.fb.group({
@@ -26,7 +23,14 @@ export class ReactiveFormsBuilder implements OnInit{
   });
 
   formInputMainPage: FormGroup = this.fb.group({
-    date:         [new Date().toISOString()],
+    date:         [new Date().toISOString(), [Validators.required]],
+    category:     ['',  [Validators.required]],
+    description:  ['',  [Validators.required]],
+    amount:       [NaN, [Validators.required]]
+  });
+
+  formEdit: FormGroup = this.fb.group({
+    date:         ['',  [Validators.required]],
     category:     ['',  [Validators.required]],
     description:  ['',  [Validators.required]],
     amount:       [NaN, [Validators.required]]
@@ -37,9 +41,4 @@ export class ReactiveFormsBuilder implements OnInit{
   ngOnInit(): void {
   };
 
-  onSubmit(formName: FormGroup) {
-    this.formSubmit.emit(formName.value);
-    console.log(formName.value);
-    
-  }
 }

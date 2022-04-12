@@ -1,5 +1,5 @@
 <div class="input-container">
-  <form [formGroup]="reactiveForm" 
+  <form [formGroup]="inputForm" 
         (ngSubmit)="onSubmit()">
 
     <ng-container *ngFor="let item of htmlInput">
@@ -30,7 +30,7 @@
     <button mat-fab 
             color="primary" 
             type="submit" 
-            [disabled]="!reactiveForm.valid">
+            [disabled]="!inputForm.valid">
       <mat-icon class="btn-submit" style="font-size:20px">&check;</mat-icon>
     </button>
 
