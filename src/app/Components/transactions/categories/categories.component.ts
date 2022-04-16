@@ -26,41 +26,12 @@ export class CategoriesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void { 
-    this.getCategories();
+    this.categories = this.categoryService.getCategories();
   };
   
-  getCategories() {
-    this.categoryService.getCategories().subscribe((res: any) => {
-      
-      if( Array.isArray(res) && res.length) {
-        this.categories = [];
-        res.forEach((categoryName: string) => this.categories.push({'name': categoryName}))
 
-      } else {
-        this.categories = [
-          { name: 'Salary'},
-          { name: 'Debt'},
-          { name: 'Credit'},
-          { name: 'Investments'},
-        ]; 
-      };
-
-      }, err => console.log(err)
-    );
-  }
   onSaveCategories(categories: any) {
-    let serverObject :any = [];
-    
-    categories.forEach( (element:any) =>  serverObject.push(element.name) );
-    
-    this.categoryService.saveCategories(serverObject).subscribe( (res) => {
-        this.notification.msgSuccess('Categories', 'Categories saved at database');
-        res;
-      }, err => {
-        this.notification.msgError('Categories', 'Ooops, something went wrong');
-        console.log(err);
-      }
-    );
+    this.categoryService.saveCategories(categories)
   };
 
   addCategory(event: MatChipInputEvent): void {

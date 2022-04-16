@@ -8,7 +8,8 @@ import { Budget } from 'src/app/helpers/budget';
 })
 export class HomePageComponent implements OnInit {
 
-  currentBalance: number = 0;
+  public amountTotal: number = 0;
+
 
   constructor(private budget:Budget) { }
 
@@ -17,10 +18,23 @@ export class HomePageComponent implements OnInit {
     
     setTimeout(() => {
       this.budget.getCurrentBalance();
-      this.currentBalance = this.budget.currentBalance;
-    }, 500);
+      this.amountTotal = this.budget.amountTotal;
 
-    
+      // this.budget.getMonthlyExpenses();
+      // // console.log(this.budget.monthlyObject)
+      
+      // this.budget.getMonthsNames();
+
+      // // console.log(this.budget.monthlyNames);
+      
+      // this.budget.getMonthsValue();
+      // // console.log(this.budget.monthlyValues);
+      
+
+      // this.budget.getMonthsCategories()
+      // // console.log(this.budget.monthlyCategories);
+      
+    }, 500);
   }
 
 }

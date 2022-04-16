@@ -45,8 +45,8 @@ export class EditItemModalComponent implements OnInit {
   prevAmount?: number =       this.oldExpense.amount
 
   constructor(  
-    public dialogRef: MatDialogRef<EditItemModalComponent>,
     @Inject(MAT_DIALOG_DATA) public oldExpense: ExpenseItem,
+    public dialogRef: MatDialogRef<EditItemModalComponent>,
     private reactiveFormsBuilder: ReactiveFormsBuilder,
     private expenseService: ExpenseService,
     private notification: NotificationService,
@@ -55,39 +55,22 @@ export class EditItemModalComponent implements OnInit {
   ) { }
     
   ngOnInit(): void {
+    this.categories = this.categoryService.getCategories();
     this.editForm = this.reactiveFormsBuilder.formEdit;
-
-    this.categoryService.getCategories().subscribe((res: any) => {
-      
-      if( Array.isArray(res) && res.length) {
-        this.categories = [];
-        res.forEach((categoryName: string) => this.categories.push({'name': categoryName}))
-        
-      } else {
-        this.categories = [
-          { name: 'Salary'},
-          { name: 'Debt'},
-          { name: 'Credit'},
-          { name: 'Investments'},
-        ]; 
-      };
-
-      }, err => console.log(err)
-    );
   }
 
   onEdit() {
     this.expenseService.updateExpense(this.expId, this.editForm.value).subscribe(() => {
       this.notification.msgSuccess('Expense','Expense edited successfuly');
       this.router.navigate(['/dashboard']);
+      this.closeDialog();
     },
-    error => {
-      this.notification.msgError('Expense',error.error.error);
-      console.log(error);
-    })
+    error => this.notification.msgError('Expense',error.error.error)
+    );
   }
 
-  onCancel() {
+  closeDialog() {
     this.dialogRef.close();
   }
+
 }

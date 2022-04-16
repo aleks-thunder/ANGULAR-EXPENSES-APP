@@ -11,13 +11,11 @@ import { NgMaterialModule } from './ng-material.module';
 // external libs
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { NgChartsModule } from 'ng2-charts';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 
 // components
 import { AppComponent } from './app.component';
-import { GraphicComponent } from './Components/graphic/graphic.component';
 import { BottomLinksComponent } from './Components/bottom-links/bottom-links.component';
 import { ExpenseRowComponent } from './Components/transactions/expenses/expenses.component';
 import { HomePageComponent } from './Components/pages/home/home-page/home-page.component';
@@ -31,10 +29,15 @@ import { NavbarComponent } from './Components/navbar/navbar.component';
 import { InterceptorService } from './services/http/interceptor.service';
 import { JwtModule } from '@auth0/angular-jwt';
 
+import { NgxChartsComponent } from './Components/charts/ngx-charts/ngx-charts.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { BarVerticalStackedComponent } from './Components/charts/bar-vertical-stacked/bar-vertical-stacked.component';
+import { LineChartComponent } from './Components/charts/line-chart/line-chart.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
-    GraphicComponent,
     BottomLinksComponent,
     ExpenseRowComponent,
     HomePageComponent,
@@ -45,6 +48,9 @@ import { JwtModule } from '@auth0/angular-jwt';
     SignUpComponent,
     SignInComponent,
     NavbarComponent,
+    NgxChartsComponent,
+    BarVerticalStackedComponent,
+    LineChartComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +59,6 @@ import { JwtModule } from '@auth0/angular-jwt';
     ReactiveFormsModule,
     NgMaterialModule,
     FontAwesomeModule,
-    NgChartsModule,
     BrowserAnimationsModule,
     NgbModule,
     RouterModule,
@@ -66,7 +71,8 @@ import { JwtModule } from '@auth0/angular-jwt';
            return localStorage.getItem('access_token'); 
         },
       },
-   })
+   }),
+   NgxChartsModule
   ],
   providers: [
     {

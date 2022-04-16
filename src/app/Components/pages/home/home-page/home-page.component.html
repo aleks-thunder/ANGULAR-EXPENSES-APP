@@ -2,16 +2,13 @@
   <div class="graphic-header">
     <h1>BUDGET TRACKER</h1>
     <h3>February 2022</h3>
-    <h4>Balance: <span [ngClass]="{'red': currentBalance < 0, 'green': currentBalance > 0}">
-        {{ currentBalance }} $
+    <h4>Balance: <span [ngClass]="{'red': amountTotal < 0, 'green': amountTotal > 0}">
+        {{ amountTotal }} $
       </span></h4>
   </div>
-
-  <app-graphic></app-graphic>
 
   <app-categories></app-categories>
 
   <app-input></app-input>
-
 
 </div>

@@ -4,7 +4,8 @@ const expenseSchema = require('../models/expense.model');
 exports.createExpense = (req, res) => {
 
   const user_id = req.user._id;
-  const { date, category, description, amount } = req.body
+  const { category, description, amount } = req.body;
+  let date = new Date(req.body.date).toISOString().substring(0, 10);
 
   const expense = new expenseSchema({ user_id, date, category, description, amount });
   

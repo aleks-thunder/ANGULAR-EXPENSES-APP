@@ -59,6 +59,7 @@ export class ExpenseRowComponent implements OnInit {
     },
     error => this.notification.msgError('Expense',error.error.error))
 
-    window.location.reload();
+    this.router.navigate(['/dashboard']);
   }
+
 }

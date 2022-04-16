@@ -4,10 +4,10 @@ const Schema = mongoose.Schema;
 const expenseSchema = new Schema({
   
   user_id: String,
-  category:     { type: String, unique: true, required: 'Caregory is required' },
-  description:  { type: String, unique: true, required: 'Description is required' },
+  date:         { type: String, unique: true, required: 'Date is required' },
   amount:       { type: String, unique: true, required: 'Amount is required' },
-  date:         { type: Date,   unique: true, required: 'Date is required' }
+  description:  { type: String, unique: true, required: 'Description is required' },
+  category:     { type: String, unique: true, required: 'Caregory is required' }
 
 }, { timestamps: true });
 
