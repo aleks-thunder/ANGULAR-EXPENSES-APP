@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Budget } from 'src/app/helpers/budget';
+import { BudgetService } from 'src/app/services/budget.service';
 
 @Component({
   selector: 'app-home-page',
@@ -11,30 +11,15 @@ export class HomePageComponent implements OnInit {
   public amountTotal: number = 0;
 
 
-  constructor(private budget:Budget) { }
-
-  ngOnInit(): void {
-    this.budget.getAllExpenses();
-    
-    setTimeout(() => {
-      this.budget.getCurrentBalance();
-      this.amountTotal = this.budget.amountTotal;
-
-      // this.budget.getMonthlyExpenses();
-      // // console.log(this.budget.monthlyObject)
-      
-      // this.budget.getMonthsNames();
-
-      // // console.log(this.budget.monthlyNames);
-      
-      // this.budget.getMonthsValue();
-      // // console.log(this.budget.monthlyValues);
-      
-
-      // this.budget.getMonthsCategories()
-      // // console.log(this.budget.monthlyCategories);
-      
-    }, 500);
+  constructor(
+    private budgetService: BudgetService) {
   }
 
+  ngOnInit() {
+    this.budgetService.getallTransactions();
+    
+    setTimeout(() => {
+      this.amountTotal = this.budgetService.currentAmount;
+    }, 500);
+  }
 }

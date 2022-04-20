@@ -1,11 +1,9 @@
-<div *ngIf="user">
-  <h2 class="page-header">{{user.name}}</h2>
-  <ul class="list-group">
-    <li class="list-group-item">Username : {{user.username}}</li>
-    <li class="list-group-item">Email : {{user.email}}</li>
-  </ul>
-</div>
-
 <!-- <app-ngx-charts></app-ngx-charts> -->
-<app-bar-vertical-stacked></app-bar-vertical-stacked>
+<div class="charts">
+  <app-number-chart></app-number-chart>
+  <div class="lined-charts">
+    <app-bar-vertical-stacked class="mx-5"></app-bar-vertical-stacked>
+    <app-advanced-pie class="ml-5"></app-advanced-pie>
+  </div>
+</div>
 <app-expenses></app-expenses>

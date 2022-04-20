@@ -1,0 +1,12 @@
+
+app-number-chart, app-bar-vertical-stacked, app-line-chart {
+  display: flex;
+  justify-content: center;
+}
+
+.lined-charts {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 5px 20px;
+}

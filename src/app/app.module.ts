@@ -29,10 +29,11 @@ import { NavbarComponent } from './Components/navbar/navbar.component';
 import { InterceptorService } from './services/http/interceptor.service';
 import { JwtModule } from '@auth0/angular-jwt';
 
-import { NgxChartsComponent } from './Components/charts/ngx-charts/ngx-charts.component';
+import { PieChartComponent } from './Components/charts/pie-chart/pie-chart.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { BarVerticalStackedComponent } from './Components/charts/bar-vertical-stacked/bar-vertical-stacked.component';
-import { LineChartComponent } from './Components/charts/line-chart/line-chart.component';
+import { AdvancedPieComponent } from './Components/charts/advanced-pie/advanced-pie.component';
+import { NumberChartComponent } from './Components/charts/number-chart/number-chart.component';
 
 
 @NgModule({
@@ -48,9 +49,10 @@ import { LineChartComponent } from './Components/charts/line-chart/line-chart.co
     SignUpComponent,
     SignInComponent,
     NavbarComponent,
-    NgxChartsComponent,
+    PieChartComponent,
     BarVerticalStackedComponent,
-    LineChartComponent
+    AdvancedPieComponent,
+    NumberChartComponent
   ],
   imports: [
     BrowserModule,

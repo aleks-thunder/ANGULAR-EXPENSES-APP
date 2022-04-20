@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { Budget } from 'src/app/helpers/budget';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { BudgetService } from 'src/app/services/budget.service';
 
 @Component({
   selector: 'app-bar-vertical-stacked',
   templateUrl: './bar-vertical-stacked.component.html',
   styleUrls: ['./bar-vertical-stacked.component.scss']
 })
-export class BarVerticalStackedComponent implements OnInit {
+export class BarVerticalStackedComponent implements OnInit, OnDestroy {
 
-  data: any;
+  data: Array<any> = [];
 
-  view: any = [700, 400];
+  view: [number, number] = [700, 400];
 
   // options
   showXAxis: boolean = true;
@@ -23,27 +23,21 @@ export class BarVerticalStackedComponent implements OnInit {
   yAxisLabel: string = 'Amount';
   animations: boolean = true;
 
-  colorScheme: any = {
-    domain: ['#5AA454', '#C7B42C', '#AAAAAA', 'fff', '000', 'red']
+  colorScheme?: any = {
+    domain: ["#fd7f6f", "#7eb0d5", "#b2e061", "#bd7ebe", "#ffb55a", "#ffee65", "#beb9db", "#fdcce5", "#8bd3c7"]
   };
 
-  constructor(private budget: Budget) {
-  }
+  constructor(private budgetService: BudgetService) { }
 
   ngOnInit(): void {
-    this.budget.getAllExpenses();
-
     setTimeout(() => {
-
-      this.budget.getMonthlyExpenses();
-      this.budget.getMonthsNames();
-      this.budget.getMonthsValues();
-      this.budget.getMonthsCategories();
-      this.budget.setChartBarData()
-
-      this.data = this.budget.chartBarData
-      
+      this.data = this.budgetService.chartBarData;
+      console.log(this.data);
     }, 1500);
+  }
+
+  ngOnDestroy(): void {
+    this.data = [];
   }
 
 }

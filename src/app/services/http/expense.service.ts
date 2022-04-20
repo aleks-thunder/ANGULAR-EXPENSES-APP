@@ -22,7 +22,7 @@ export class ExpenseService {
   }
 
   public getExpense(): Observable<ExpenseItem> {
-    return this.http.get(`${ENV.API_BASE_URL}/dashboard`)
+    return this.http.get(`${ENV.API_BASE_URL}/dashboard`);
   }
 
   public updateExpense(itemId: any, item: ExpenseItem): Observable<ExpenseItem> {

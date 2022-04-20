@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/http/auth.service';
+import { BudgetService } from 'src/app/services/budget.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,11 +8,12 @@ import { AuthService } from 'src/app/services/http/auth.service';
 })
 export class DashboardComponent implements OnInit {
 
-  user?: any;
-
-  constructor(private auth: AuthService, private router: Router) { }
+  constructor(
+    private budgetService: BudgetService) {
+  }
 
   ngOnInit() {
-
+    this.budgetService.getallTransactions();
   }
+
 }
