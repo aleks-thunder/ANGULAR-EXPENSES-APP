@@ -28,9 +28,7 @@ export class PieChartComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    setTimeout(() => {
-      this.data = this.budgetService.chartPieData
-    }, 1500);
+    this.budgetService.chartPieData.subscribe((data: Array<any>) => this.data = data);
   }
  
 

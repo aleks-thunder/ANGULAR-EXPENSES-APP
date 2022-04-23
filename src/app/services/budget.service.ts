@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ExpenseItem } from '../interfaces/expense-item';
 import { ExpenseService } from './http/expense.service';
-import { Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { filter } from 'rxjs/operators'
 
 @Injectable({
@@ -12,7 +12,7 @@ export class BudgetService {
 
   // Current
   private allTransactions?: any;
-  currentAmount: number = 0
+  currentAmount = new BehaviorSubject<number>(0);
   allReceipts: number = 0
   allExpenses: number = 0
 
@@ -21,17 +21,18 @@ export class BudgetService {
   monthlyValues: any;
   monthlyCategories: any;
 
-  chartBarData: Array<any> = [];
-  chartPieData: Array<any> = [];
-  chartAdvancedPieData: Array<any> = [];
-  chartNumberData: Array<any> = [];
+  chartBarData = new BehaviorSubject<Array<any>>([]);
+  chartPieData = new BehaviorSubject<Array<any>>([]);
+  chartAdvancedPieData = new BehaviorSubject<Array<any>>([]);
+  chartNumberData = new BehaviorSubject<Array<any>>([]);
 
   allCategories: any;
   
   constructor(
     private expenseService: ExpenseService,
   ) { }
-// OBservable, behavier suject 
+
+  // OBservable, behavier suject 
   getallTransactions() {
     // Get all expenses from DB
     this.expenseService.getExpense()
@@ -66,17 +67,21 @@ export class BudgetService {
       .reduce((acc:number, item: number) => acc + item, 0);
 
     // Current Amount
-    this.currentAmount = this.allReceipts + this.allExpenses;
+    this.currentAmount.next(this.allReceipts + this.allExpenses);
 
-    // [month, transaction]
-    this.allTransactions.forEach((tras: any) => {
-      const newDate = new Date(tras.date);
-      const monthAndYear = newDate.toLocaleString('en-GB', { month: 'long' }) + ' ' + newDate.getFullYear();
     
-      (this.monthlyObject[monthAndYear] && this.monthlyObject[monthAndYear].length)
-      ? this.monthlyObject[monthAndYear].push(tras)
-      : this.monthlyObject[monthAndYear] = [tras];
-    });
+    const monthNames = [ "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December" ];
+
+    this.allTransactions.reduce((acc: any, element: ExpenseItem) => {
+      const [ year, month ]:any = element.date?.split('-');
+      // 'Month YY' format
+      const label = monthNames[+month - 1] + ' ' + year.slice(2);
+      
+      if (!acc[label]) acc[label] = [];
+      acc[label].push(element);
+      return this.monthlyObject = acc;
+    }, {});
 
     const monthObjEntries = (name: string) => Object
       .entries(this.monthlyObject)
@@ -85,50 +90,23 @@ export class BudgetService {
     this.monthlyNames = Object.keys(this.monthlyObject);
     this.monthlyValues = monthObjEntries('amount');
     this.monthlyCategories = monthObjEntries('category');
-
   }
 
   private setChartBarData() {
-    let result: Array<any> = [];
-    let subArray: Array<any> = [];
-    let subArray2: Array<any> = [];
-
-    for (let i = 0; i < this.monthlyValues.length; i++) {
-      // if 1 expense per month push to subArray => result
-      if(this.monthlyValues[i].length == 1) {
-        subArray.push([
-          {
-            "name": this.monthlyCategories[i],
-            "value": +this.monthlyValues[i] 
-          }
-        ])
-      } else {
-        for (let j = 0; j < this.monthlyValues[i].length; j++) {
-          // if more then 1 expense per month push to subArray2 => subArray => result
-          subArray2.push({
-              "name": this.monthlyCategories[i][j], 
-              "value": +this.monthlyValues[i][j] 
-            });
-        };
-        subArray.push(subArray2);
-      };
-    };
-
-    //combine all together
-    for (let i = 0; i < this.monthlyNames.length; i++) {
-      result.push(
-        {
-          "name": this.monthlyNames[i],
-          "series": subArray[i]
-        }
-      );
-    };
-
-    this.chartBarData = result;
+    const result = this.monthlyNames.map((month: string, mLength: number) => ({
+      name: month,
+      series: this.monthlyCategories[mLength].map((category: string, cLength: number) => ({
+        name: category,
+        value: +this.monthlyValues[mLength][cLength]
+      }))
+    }));
+    
+    return this.chartBarData.next(result);
   }
 
   private setChartPieData() {
-    this.chartPieData.push( 
+    let result: Array<any> = [];
+    result.push( 
       {
         "name": "Receipts",
         "value": this.allReceipts
@@ -138,6 +116,8 @@ export class BudgetService {
         "value": Math.abs(this.allExpenses)
       }
     )
+    
+    this.chartPieData.next(result);
   }
 
   private setChartAdvancedPieData() {
@@ -160,12 +140,12 @@ export class BudgetService {
       .push( subArray.find(element => element.name === item))
       );
     
-    this.chartAdvancedPieData = result;
+    this.chartAdvancedPieData.next(result);
   }
 
   private setChartNumberData() {
     let result: Array<any> = [];
-    // First / Last Transaction
+
     const transactions = this.allTransactions
       .filter((item: any) => item.amount)
       .map((transaction: any) => transaction.category);
@@ -189,7 +169,7 @@ export class BudgetService {
       },
       { 
         "name": "Current Amount",
-        "value": this.currentAmount + ' $' 
+        "value": this.currentAmount.value + ' $' 
       },
       {
         "name": "Transactions",
@@ -213,7 +193,7 @@ export class BudgetService {
       }
     )
 
-    this.chartNumberData = result;
+    this.chartNumberData.next(result);
   }
 
 }

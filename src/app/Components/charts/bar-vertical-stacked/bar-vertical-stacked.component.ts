@@ -6,7 +6,7 @@ import { BudgetService } from 'src/app/services/budget.service';
   templateUrl: './bar-vertical-stacked.component.html',
   styleUrls: ['./bar-vertical-stacked.component.scss']
 })
-export class BarVerticalStackedComponent implements OnInit, OnDestroy {
+export class BarVerticalStackedComponent implements OnInit {
 
   data: Array<any> = [];
 
@@ -28,16 +28,8 @@ export class BarVerticalStackedComponent implements OnInit, OnDestroy {
   };
 
   constructor(private budgetService: BudgetService) { }
-
+  
   ngOnInit(): void {
-    setTimeout(() => {
-      this.data = this.budgetService.chartBarData;
-      console.log(this.data);
-    }, 1500);
+    this.budgetService.chartBarData.subscribe((data: Array<any>) => this.data = data);
   }
-
-  ngOnDestroy(): void {
-    this.data = [];
-  }
-
 }

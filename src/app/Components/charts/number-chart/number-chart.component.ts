@@ -21,9 +21,7 @@ export class NumberChartComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    setTimeout(() => {
-      this.data = this.budgetService.chartNumberData;
-    }, 1500);
+    this.budgetService.chartNumberData.subscribe((data: Array<any>) => this.data = data)
   }
 
 }

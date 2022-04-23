@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ExpenseItem } from 'src/app/interfaces/expense-item';
 import { environment } from '../../../environments/environment'
-import { map } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 
 const ENV = environment;
 @Injectable({
@@ -12,9 +12,7 @@ const ENV = environment;
 export class ExpenseService {
 
 
-  constructor(
-    private http: HttpClient,
-    ) {
+  constructor( private http: HttpClient ) {
   }
 
   public addExpense(data: ExpenseItem): Observable<ExpenseItem> {
@@ -22,7 +20,7 @@ export class ExpenseService {
   }
 
   public getExpense(): Observable<ExpenseItem> {
-    return this.http.get(`${ENV.API_BASE_URL}/dashboard`);
+    return this.http.get(`${ENV.API_BASE_URL}/dashboard`).pipe(filter(Boolean));
   }
 
   public updateExpense(itemId: any, item: ExpenseItem): Observable<ExpenseItem> {

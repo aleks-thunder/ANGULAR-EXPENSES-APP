@@ -25,10 +25,7 @@ export class AdvancedPieComponent implements OnInit {
   constructor(private budgetService: BudgetService) { }
 
   ngOnInit(): void {
-    
-    setTimeout(() => {
-      this.data = this.budgetService.chartAdvancedPieData;
-    }, 1500);
+    this.budgetService.chartAdvancedPieData.subscribe((data: Array<any>) => this.data = data)
   }
 
 }

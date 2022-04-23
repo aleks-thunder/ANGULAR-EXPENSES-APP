@@ -2,8 +2,8 @@
   <div class="graphic-header">
     <h1>BUDGET TRACKER</h1>
     <h3>February 2022</h3>
-    <h4>Balance: <span [ngClass]="{'red': amountTotal < 0, 'green': amountTotal > 0}">
-        {{ amountTotal }} $
+    <h4>Balance: <span [ngClass]="{'red': currentAmount < 0, 'green': currentAmount > 0}">
+        {{ currentAmount }} $
       </span></h4>
   </div>
 

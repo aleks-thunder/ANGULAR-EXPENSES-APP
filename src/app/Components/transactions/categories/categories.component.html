@@ -1,47 +1,39 @@
-<div class="d-flex flex-row mt-1 mb-3">
-
-  <mat-card class="pb-4">
-
-    <mat-card-title>Categories</mat-card-title>
-    <mat-card-subtitle>Drag & drop to change order list</mat-card-subtitle>
-    <mat-card-content>
-      <input  placeholder="Add category..." 
-      [matChipInputFor]="chipList"
-      (matChipInputTokenEnd)="addCategory($event)"
-      >
-      <mat-chip-list  #contenedor 
-                      #chipList 
-                      cdkDropListGroup
+<mat-card class="pb-4">
+  <mat-card-title>Categories</mat-card-title>
+  <mat-card-subtitle>Drag & drop to change order list</mat-card-subtitle>
+  <mat-card-content>
+    <input  placeholder="Add category..." 
+    [matChipInputFor]="chipList"
+    (matChipInputTokenEnd)="addCategory($event)"
+    >
+    <mat-chip-list  #contenedor 
+                    #chipList 
+                    cdkDropListGroup
+                    >
+      <ng-container *ngFor="let category of categories; 
+                    let i = index">
+        <div  cdkDropList 
+              cdkDropListOrientation="vertical" 
+              [cdkDropListData]="{item: category, index: i}"
+              (cdkDropListDropped)="dragCategory($event)"
+              >
+          <div cdkDrag>
+            <div *cdkDragPlaceholder></div>
+            <mat-chip id="hi" #toggle="matChip" 
+                      (click)="chipSelection(toggle, category.name)" 
+                      color="warn"
+                      (removed)="removeCategory(category)"
                       >
-        <ng-container *ngFor="let category of categories; 
-                      let i = index">
-          <div  cdkDropList 
-                cdkDropListOrientation="vertical" 
-                [cdkDropListData]="{item: category, index: i}"
-                (cdkDropListDropped)="dragCategory($event)"
-                >
-            <div cdkDrag>
-              <div *cdkDragPlaceholder></div>
-              <mat-chip id="hi" #toggle="matChip" 
-                        (click)="chipSelection(toggle, category.name)" 
-                        color="warn"
-                        (removed)="removeCategory(category)"
-                        >
-                <mat-icon *ngIf="toggle.selected">check</mat-icon>
-                {{category.name}}
-                <button matChipRemove>
-                  <mat-icon>cancel</mat-icon>
-                </button>
-              </mat-chip>
-            </div>
+              <mat-icon *ngIf="toggle.selected">check</mat-icon>
+              {{category.name}}
+              <button matChipRemove>
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-chip>
           </div>
-        </ng-container>
-
-      </mat-chip-list>
-      <button mat-raised-button color="primary" class="btn-save" (click)="onSaveCategories(categories)">save categories</button>
-    </mat-card-content>
-    <mat-card-footer>
-      <mat-progress-bar class="expense-progress-bar" color="accent" mode="query"></mat-progress-bar>
-    </mat-card-footer>
-
-  </mat-card>
+        </div>
+      </ng-container>
+    </mat-chip-list>
+    <button mat-raised-button color="primary" class="btn-save" (click)="onSaveCategories(categories)">save categories</button>
+  </mat-card-content>
+</mat-card>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { BudgetService } from 'src/app/services/budget.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { BudgetService } from 'src/app/services/budget.service';
 })
 export class HomePageComponent implements OnInit {
 
-  public amountTotal: number = 0;
+  public currentAmount: any = new BehaviorSubject(0)
 
 
   constructor(
@@ -17,9 +18,6 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit() {
     this.budgetService.getallTransactions();
-    
-    setTimeout(() => {
-      this.amountTotal = this.budgetService.currentAmount;
-    }, 500);
+    this.budgetService.currentAmount.subscribe(val => this.currentAmount = val);
   }
 }
