@@ -38,11 +38,11 @@ export class EditItemModalComponent implements OnInit {
 
   editForm!: FormGroup;
 
-  expId?: string =            this.oldExpense._id
-  prevDate?: string =         this.oldExpense.date
-  prevCategory?: string =     this.oldExpense.category
-  prevDescription?: string =  this.oldExpense.description
-  prevAmount?: number =       this.oldExpense.amount
+  expId: string | undefined =            this.oldExpense._id
+  prevDate: string | undefined =         this.oldExpense.date
+  prevCategory: string | undefined =     this.oldExpense.category
+  prevDescription: string | undefined =  this.oldExpense.description
+  prevAmount: number | undefined =       this.oldExpense.amount
 
   constructor(  
     @Inject(MAT_DIALOG_DATA) public oldExpense: ExpenseItem,

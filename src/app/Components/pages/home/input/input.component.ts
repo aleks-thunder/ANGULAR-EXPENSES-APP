@@ -12,7 +12,7 @@ import { ReactiveFormsBuilder } from 'src/app/helpers/form-bilders';
 import { ExpenseItem } from 'src/app/interfaces/expense-item';
 import { ExpenseService } from 'src/app/services/http/expense.service';
 import { NotificationService } from 'src/app/services/notification.service';
-import { CategoryInputHelper } from 'src/app/helpers/category-input-helper';
+import { CategoryInputHelper } from 'src/app/shared/category-input-helper';
 
 const dateFormat = { display: { dateInput: 'll', monthYearLabel: 'MMMM YYYY' } };
 

@@ -45,6 +45,7 @@
     "moment": "^2.29.1",
     "mongoose": "^6.2.8",
     "ng2-charts": "^3.0.9",
+    "ngx-pagination": "^5.1.1",
     "passport": "^0.5.2",
     "passport-jwt": "^4.0.0",
     "rxjs": "~7.4.0",

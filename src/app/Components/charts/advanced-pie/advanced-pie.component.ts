@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BudgetService } from 'src/app/services/budget.service';
+import { ChartService } from 'src/app/services/chart.service';
 
 @Component({
   selector: 'app-advanced-pie',
@@ -22,10 +22,10 @@ export class AdvancedPieComponent implements OnInit {
     domain: ["#fd7f6f", "#7eb0d5", "#b2e061", "#bd7ebe", "#ffb55a", "#ffee65", "#beb9db", "#fdcce5", "#8bd3c7"]
   };
 
-  constructor(private budgetService: BudgetService) { }
+  constructor(private chartService: ChartService) { }
 
   ngOnInit(): void {
-    this.budgetService.chartAdvancedPieData.subscribe((data: Array<any>) => this.data = data)
+    this.chartService.chartAdvancedPieData.subscribe((data: Array<any>) => this.data = data)
   }
 
 }

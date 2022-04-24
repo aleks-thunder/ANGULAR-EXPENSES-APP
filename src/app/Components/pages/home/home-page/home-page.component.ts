@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { BudgetService } from 'src/app/services/budget.service';
+import { ChartService } from 'src/app/services/chart.service';
 
 @Component({
   selector: 'app-home-page',
@@ -13,11 +13,11 @@ export class HomePageComponent implements OnInit {
 
 
   constructor(
-    private budgetService: BudgetService) {
+    private chartService: ChartService) {
   }
 
   ngOnInit() {
-    this.budgetService.getallTransactions();
-    this.budgetService.currentAmount.subscribe(val => this.currentAmount = val);
+    this.chartService.getallTransactions();
+    this.chartService.currentAmount.subscribe(val => this.currentAmount = val);
   }
 }

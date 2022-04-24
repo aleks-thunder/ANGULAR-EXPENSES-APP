@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
 
+// ng material modules
 import { NgMaterialModule } from './ng-material.module';
 
 // external libs
@@ -13,6 +14,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { SimpleNotificationsModule } from 'angular2-notifications';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { JwtModule } from '@auth0/angular-jwt';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 // components
 import { AppComponent } from './app.component';
@@ -27,10 +31,8 @@ import { SignUpComponent } from './Components/pages/auth/sign-up/sign-up.compone
 import { SignInComponent } from './Components/pages/auth/sign-in/sign-in.component';
 import { NavbarComponent } from './Components/navbar/navbar.component';
 import { InterceptorService } from './services/http/interceptor.service';
-import { JwtModule } from '@auth0/angular-jwt';
 
 import { PieChartComponent } from './Components/charts/pie-chart/pie-chart.component';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { BarVerticalStackedComponent } from './Components/charts/bar-vertical-stacked/bar-vertical-stacked.component';
 import { AdvancedPieComponent } from './Components/charts/advanced-pie/advanced-pie.component';
 import { NumberChartComponent } from './Components/charts/number-chart/number-chart.component';
@@ -74,7 +76,8 @@ import { NumberChartComponent } from './Components/charts/number-chart/number-ch
         },
       },
    }),
-   NgxChartsModule
+   NgxChartsModule,
+   NgxPaginationModule
   ],
   providers: [
     {

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatChip } from '@angular/material/chips';
 import { CategoryInterface } from 'src/app/interfaces/category';
-import { CategoryInputHelper } from 'src/app/helpers/category-input-helper';
+import { CategoryInputHelper } from 'src/app/shared/category-input-helper';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { CategoriesService } from 'src/app/services/http/categories.service';

@@ -19,9 +19,12 @@ import { EditItemModalComponent } from '../edit-item-modal/edit-item-modal.compo
 
 export class ExpenseRowComponent implements OnInit {
 
-  expenseList?: any;
+  expenseList: any;
   faTrash = faTrash;
   faPenSquare = faPenSquare;
+
+  totalLength!: any;
+  page: number = 1;
 
   constructor(
     public  dialog: MatDialog,
@@ -36,9 +39,13 @@ export class ExpenseRowComponent implements OnInit {
 
   
   getExpenses() {
-    this.expenseService.getExpense().subscribe((getExpense: ExpenseItem ) => this.expenseList = getExpense,
+    this.expenseService.getExpense().subscribe((getExpenses: any ) => {
+      this.expenseList = getExpenses;
+      this.totalLength = getExpenses.length;
+    },
        error => console.log(error));
   }
+
 
 
   onEditBtn( item: ExpenseItem ) {

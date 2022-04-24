@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BudgetService } from 'src/app/services/budget.service';
+import { ChartService } from 'src/app/services/chart.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,11 +9,11 @@ import { BudgetService } from 'src/app/services/budget.service';
 export class DashboardComponent implements OnInit {
 
   constructor(
-    private budgetService: BudgetService) {
+    private chartService: ChartService) {
   }
 
   ngOnInit() {
-    this.budgetService.getallTransactions();
+    this.chartService.getallTransactions();
   }
 
 }

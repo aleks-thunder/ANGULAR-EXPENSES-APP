@@ -8,10 +8,10 @@ import { filter } from 'rxjs/operators'
   providedIn: 'root'
 })
 
-export class BudgetService {
+export class ChartService {
 
   // Current
-  private allTransactions?: any;
+  private allTransactions: any;
   currentAmount = new BehaviorSubject<number>(0);
   allReceipts: number = 0
   allExpenses: number = 0
@@ -32,13 +32,9 @@ export class BudgetService {
     private expenseService: ExpenseService,
   ) { }
 
-  // OBservable, behavier suject 
   getallTransactions() {
-    // Get all expenses from DB
+    
     this.expenseService.getExpense()
-    .pipe(
-      filter(Boolean),
-    )
     .subscribe((expenseList: any) => {
       // sort by earliest date
       expenseList.sort((a: any, b: any) => new Date(a.date).getTime() - new Date(b.date).getTime());

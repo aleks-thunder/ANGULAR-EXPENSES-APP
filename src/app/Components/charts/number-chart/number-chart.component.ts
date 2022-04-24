@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BudgetService } from 'src/app/services/budget.service';
+import { ChartService } from 'src/app/services/chart.service';
 
 @Component({
   selector: 'app-number-chart',
@@ -17,11 +17,11 @@ export class NumberChartComponent implements OnInit {
   };
   cardColor: string = '#2f2e29';
 
-  constructor(private budgetService: BudgetService) {
+  constructor(private chartService: ChartService) {
   }
 
   ngOnInit(): void {
-    this.budgetService.chartNumberData.subscribe((data: Array<any>) => this.data = data)
+    this.chartService.chartNumberData.subscribe((data: Array<any>) => this.data = data)
   }
 
 }

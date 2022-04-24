@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BudgetService } from 'src/app/services/budget.service';
+import { ChartService } from 'src/app/services/chart.service';
 // import { single } from './data';
 
 
@@ -24,11 +24,11 @@ export class PieChartComponent implements OnInit {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
   };
 
-  constructor(private budgetService: BudgetService) {
+  constructor(private chartService: ChartService) {
   }
 
   ngOnInit(): void {
-    this.budgetService.chartPieData.subscribe((data: Array<any>) => this.data = data);
+    this.chartService.chartPieData.subscribe((data: Array<any>) => this.data = data);
   }
  
 

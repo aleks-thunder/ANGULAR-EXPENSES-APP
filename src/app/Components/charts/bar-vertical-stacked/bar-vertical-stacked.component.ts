@@ -1,5 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { BudgetService } from 'src/app/services/budget.service';
+import { Component, OnInit } from '@angular/core';
+import { ChartService } from 'src/app/services/chart.service';
 
 @Component({
   selector: 'app-bar-vertical-stacked',
@@ -23,13 +23,13 @@ export class BarVerticalStackedComponent implements OnInit {
   yAxisLabel: string = 'Amount';
   animations: boolean = true;
 
-  colorScheme?: any = {
+  colorScheme: any = {
     domain: ["#fd7f6f", "#7eb0d5", "#b2e061", "#bd7ebe", "#ffb55a", "#ffee65", "#beb9db", "#fdcce5", "#8bd3c7"]
   };
 
-  constructor(private budgetService: BudgetService) { }
+  constructor(private chartService: ChartService) { }
   
   ngOnInit(): void {
-    this.budgetService.chartBarData.subscribe((data: Array<any>) => this.data = data);
+    this.chartService.chartBarData.subscribe((data: Array<any>) => this.data = data);
   }
 }
