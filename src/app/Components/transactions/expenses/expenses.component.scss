@@ -1,15 +1,24 @@
 .sort-btns {
+  display: flex;
+  justify-content: center;
+
+  .btn-outline-warning {
+    border: 1px solid #ffc107;;
+  }
   
+  input{
+    height: 39px;
+    position: relative;
+    width: 200px;
+    top: 3px;
+    text-align: start;
+    background-color: transparent;
+    border: 1px solid grey;
+  }
 }
 
-
-.receipt {
-  color: green;
-}
-
-.expense {
-  color: red;
-}
+.receipt { color: green; }
+.expense { color: red; }
 
 .border-left {
   border-left: solid 1px grey !important;
@@ -33,26 +42,44 @@
     inset 0 0 5rem rgb(255, 229, 84);
   transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
 
+  .btns{
+    position: relative;
+    right: -200px;
+    opacity: 0;
+    transition: all 0.3s ease-out;
+    
+    fa-icon{
+      font-size: 20px;
+    }
+  }
+
+  &:hover {
+    transform: scaleX(1.02) scaleY(1.2);
+    box-shadow:
+    inset 0 0 8rem rgba(50,50,50,.1),
+    inset 0 0 5rem gold;
+
     .btns{
-      position: relative;
-      right: -200px;
-      opacity: 0;
-      transition: all 0.3s ease-out;
+      transform: scaleY(.9);
+      opacity: 1;
     }
 
-    &:hover {
-      transform: scaleX(1.02) scaleY(1.2);
-      box-shadow:
-      inset 0 0 8rem rgba(50,50,50,.1),
-      inset 0 0 5rem gold;
-      .btns{
-        transform: scaleY(.9);
-        opacity: 1;
-      }
+    .btn-edit, .btn-delete{
+      transition: all .2s ease-out;
     }
 
-    &:hover:before {
-      content: ' ';
-      transform: scaleX(0) scaleY(0.7);
+    .btn-edit:hover, .btn-delete:hover{
+      transform: scale(1.2);
     }
+  }
+  
+  &:hover:before {
+    content: ' ';
+    transform: scaleX(0) scaleY(0.7);
+  }
+}
+
+pagination-controls {
+  display: flex;
+  justify-content: center;
 }

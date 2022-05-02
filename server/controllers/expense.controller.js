@@ -53,3 +53,12 @@ exports.deleteExpenses = (req, res) => {
     else return res.json(deletedItem);
   });
 }
+
+exports.deleteAllExpenses = (req, res) => {
+  const user_id = req.user._id;
+
+  expenseSchema.deleteMany({user_id: user_id}, (err, allDeleted) => {
+    if(err) return res.status(422).json({'error': 'cant delete all'})
+    else return res.json(allDeleted)
+  })
+}

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment'
-import { CategoryInterface } from 'src/app/interfaces/category';
+import { CategoryIfc } from 'src/app/interfaces/category';
 import { NotificationService } from '../notification.service';
 
 const ENV = environment;
@@ -17,17 +17,17 @@ export class CategoriesService {
     ) {
   }
 
-  private saveCategoriestoDB(data: CategoryInterface): Observable<CategoryInterface> {
+  private saveCategoriestoDB(data: CategoryIfc): Observable<CategoryIfc> {
     return this.http.post(`${ENV.API_BASE_URL}/categories`, data);
   }
 
-  private getFromDB(): Observable<CategoryInterface> {
+  private getFromDB(): Observable<CategoryIfc> {
     return this.http.get(`${ENV.API_BASE_URL}/categories`)
   }
 
   public getCategories() {
-    const categories: CategoryInterface[] = [];
-    const defaultCategories: CategoryInterface[] = [
+    const categories: CategoryIfc[] = [];
+    const defaultCategories: CategoryIfc[] = [
       { name: 'Salary'},
       { name: 'Debt'},
       { name: 'Credit'},
@@ -46,10 +46,12 @@ export class CategoriesService {
     return categories;
   }
 
-  public saveCategories(categories: any) {
+  public saveCategories(categories: CategoryIfc[]) {
     //prep obj for DB format
-    let serverObject: any = [];
-    categories.forEach( (element: any) => serverObject.push(element.name) );
+    let serverObject: CategoryIfc = [];
+    categories.forEach( (element: CategoryIfc) => serverObject.push(element.name) );
+    
+    console.log(serverObject);
     
     this.saveCategoriestoDB(serverObject).subscribe( () => {
         this.notification.msgSuccess('Categories', 'Categories saved at database');

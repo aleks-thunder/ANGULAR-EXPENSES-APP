@@ -12,7 +12,7 @@ export class ReactiveFormsBuilder implements OnInit{
   formRegister: FormGroup = this.fb.group({
     name:         ['', [Validators.required]],
     login:        ['', [Validators.required, Validators.minLength(4)]],
-    email:        ['', [Validators.required]],
+    email:        ['', [Validators.required, Validators.email]],
     password:     ['', [Validators.required, Validators.minLength(8)]],
     passConfirm:  ['', [Validators.required, Validators.minLength(8)]]
   });
@@ -33,7 +33,7 @@ export class ReactiveFormsBuilder implements OnInit{
     date:         ['',  [Validators.required]],
     category:     ['',  [Validators.required]],
     description:  ['',  [Validators.required]],
-    amount:       [0, [Validators.required]]
+    amount:       [0,   [Validators.required]]
   });
   
   constructor( public fb: FormBuilder ) { };

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { ChartService } from 'src/app/services/chart.service';
+import { DataService } from 'src/app/services/chart.service';
 
 @Component({
   selector: 'app-home-page',
@@ -9,15 +8,13 @@ import { ChartService } from 'src/app/services/chart.service';
 })
 export class HomePageComponent implements OnInit {
 
-  public currentAmount: any = new BehaviorSubject(0)
+  currentAmount: number = 0;
 
-
-  constructor(
-    private chartService: ChartService) {
+  constructor(private dataService: DataService) {
   }
 
   ngOnInit() {
-    this.chartService.getallTransactions();
-    this.chartService.currentAmount.subscribe(val => this.currentAmount = val);
+    this.dataService.setChartsData();
+    this.dataService.currentAmount.subscribe((value: number) => this.currentAmount = value);
   }
 }

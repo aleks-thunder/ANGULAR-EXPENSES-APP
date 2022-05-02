@@ -4,10 +4,11 @@
   width: 1000px;
   text-align: center;
   background: transparent;
-  transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
-  padding: 16px;
-  padding-bottom: 50px;
-  border-radius: 4px;
+  border-radius: 20px !important;
+  border: 2px solid grey;
+  border-top: none;
+  border-left: none;
+  border-right: none;
 
   input.mat-chip-input {
     text-align: center;

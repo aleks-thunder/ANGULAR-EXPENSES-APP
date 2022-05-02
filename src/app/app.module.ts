@@ -36,6 +36,8 @@ import { PieChartComponent } from './Components/charts/pie-chart/pie-chart.compo
 import { BarVerticalStackedComponent } from './Components/charts/bar-vertical-stacked/bar-vertical-stacked.component';
 import { AdvancedPieComponent } from './Components/charts/advanced-pie/advanced-pie.component';
 import { NumberChartComponent } from './Components/charts/number-chart/number-chart.component';
+import { FilterPipe } from './Pipes/filter.pipe';
+import { LoaderComponent } from './Components/loader/loader.component';
 
 
 @NgModule({
@@ -54,7 +56,9 @@ import { NumberChartComponent } from './Components/charts/number-chart/number-ch
     PieChartComponent,
     BarVerticalStackedComponent,
     AdvancedPieComponent,
-    NumberChartComponent
+    NumberChartComponent,
+    FilterPipe,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,

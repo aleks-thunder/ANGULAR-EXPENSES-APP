@@ -1,11 +1,12 @@
 <mat-card class="pb-4">
-  <mat-card-title>Categories</mat-card-title>
+  <mat-card-title>Select Category</mat-card-title>
   <mat-card-subtitle>Drag & drop to change order list</mat-card-subtitle>
   <mat-card-content>
-    <input  placeholder="Add category..." 
-    [matChipInputFor]="chipList"
-    (matChipInputTokenEnd)="addCategory($event)"
-    >
+    <b>
+      <input  placeholder="Add new category here..." 
+      [matChipInputFor]="chipList"
+      (matChipInputTokenEnd)="addCategory($event)">
+    </b>
     <mat-chip-list  #contenedor 
                     #chipList 
                     cdkDropListGroup

@@ -1,3 +1,6 @@
-export interface CategoryInterface {
+export interface CategoryIfc {
   name?: string;
+
+  //methods
+  push?: any;
 }

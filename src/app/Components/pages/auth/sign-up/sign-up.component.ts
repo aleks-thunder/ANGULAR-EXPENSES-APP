@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 // import { FormBuilder} from '@angular/forms';
-import { InputInterface } from 'src/app/interfaces/input';
+import { InputIfc } from 'src/app/interfaces/input';
 import { InputHTML } from 'src/app/helpers/input-html';
 import { ReactiveFormsBuilder } from 'src/app/helpers/form-bilders';
 import { AuthService } from 'src/app/services/http/auth.service';
 import { Router } from '@angular/router';
 import { NotificationService } from 'src/app/services/notification.service';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-sign-up',
@@ -14,11 +15,9 @@ import { NotificationService } from 'src/app/services/notification.service';
 })
 export class SignUpComponent implements OnInit {
 
-  // ! hide = true; tb implement later
+  formRegister!: FormGroup;
 
-  formRegister!: any;
-
-  inputReg: InputInterface[] = this.inputHTML.inputReg;
+  inputReg: InputIfc[] = this.inputHTML.inputReg;
 
   constructor(
     private auth: AuthService,

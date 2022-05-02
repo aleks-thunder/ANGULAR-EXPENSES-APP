@@ -10,7 +10,7 @@ export class NotificationService {
     private notification: NotificationsService
   ) { }
 
-  public msgSuccess(title: string, message: string) {
+  msgSuccess(title: string, message: string) {
     this.notification.success(title, message, {
       position: ['bottom', 'right'],
       timeOut: 3000,
@@ -19,8 +19,17 @@ export class NotificationService {
     });
   }
 
-  public msgError(title: string, message: string) {
+  msgError(title: string, message: string) {
     this.notification.error(title, message, {
+      position: ['bottom', 'right'],
+      timeOut: 5000,
+      animate: 'fade',
+      showProgressBar: true
+    });
+  }
+
+  msgWarning(title: string, message: string) {
+    this.notification.warn(title, message, {
       position: ['bottom', 'right'],
       timeOut: 5000,
       animate: 'fade',

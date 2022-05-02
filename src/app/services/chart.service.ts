@@ -2,96 +2,98 @@ import { Injectable } from '@angular/core';
 import { ExpenseItem } from '../interfaces/expense-item';
 import { ExpenseService } from './http/expense.service';
 import { BehaviorSubject } from 'rxjs';
-import { filter } from 'rxjs/operators'
+import { ChartsIfс } from '../interfaces/charts';
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class ChartService {
+export class DataService {
 
   // Current
-  private allTransactions: any;
-  currentAmount = new BehaviorSubject<number>(0);
   allReceipts: number = 0
   allExpenses: number = 0
+  currentAmount = new BehaviorSubject<number>(0);
 
-  monthlyObject: any = {};
-  monthlyNames: any;
-  monthlyValues: any;
-  monthlyCategories: any;
+  private monthlyObject: [month: ExpenseItem[], arr: ExpenseItem[]] = [[],[]];
+  private monthlyNames: string[] = [];
+  private monthlyValues: string[] = [];
+  private monthlyCategories!: string[]
 
-  chartBarData = new BehaviorSubject<Array<any>>([]);
-  chartPieData = new BehaviorSubject<Array<any>>([]);
-  chartAdvancedPieData = new BehaviorSubject<Array<any>>([]);
-  chartNumberData = new BehaviorSubject<Array<any>>([]);
+  chartBarData = new BehaviorSubject<ChartsIfс[]>([]);
+  chartPieData = new BehaviorSubject<ChartsIfс[]>([]);
+  chartNumberData = new BehaviorSubject<ChartsIfс[]>([]);
+  chartAdvancedPieData = new BehaviorSubject<ChartsIfс[]>([]);
 
-  allCategories: any;
-  
   constructor(
     private expenseService: ExpenseService,
   ) { }
 
-  getallTransactions() {
+  setChartsData() {
     
     this.expenseService.getExpense()
-    .subscribe((expenseList: any) => {
+    .subscribe((expenseList: ExpenseItem) => {
       // sort by earliest date
-      expenseList.sort((a: any, b: any) => new Date(a.date).getTime() - new Date(b.date).getTime());
-      this.allTransactions = expenseList;
-
-      this.getValues();
-      this.setChartBarData();
-      this.setChartPieData();
-      this.setChartAdvancedPieData();
-      this.setChartNumberData();
+      expenseList.sort((a: ExpenseItem, b: ExpenseItem) => new Date(a.date!).getTime() - new Date(b.date!).getTime());
+      
+      if(Array.isArray(expenseList) && expenseList.length) {
+        this.getValues(expenseList);
+        this.setChartBarData();
+        this.setChartPieData();
+        this.setChartAdvancedPieData(expenseList);
+        this.setChartNumberData(expenseList);
+      }
     },
     error => console.log(error));
   }
 
-  private getValues() {
+  private getValues(expenseList: ExpenseItem) {
     // All receipts amount
-    this.allReceipts = this.allTransactions
+    this.allReceipts = expenseList
       .filter((item: ExpenseItem) => Number(item.amount) > 0)
       .map((item: ExpenseItem) => Number(item.amount))
       .reduce((acc:number, item: number) => acc + item, 0);
 
     // All expenses amount
-    this.allExpenses = this.allTransactions
+    this.allExpenses = expenseList
       .filter((item: ExpenseItem) => Number(item.amount) < 0)
       .map((item: ExpenseItem)=> Number(item.amount))
-      .reduce((acc:number, item: number) => acc + item, 0);
+      .reduce((acc: number, item: number) => acc + item, 0);
 
     // Current Amount
     this.currentAmount.next(this.allReceipts + this.allExpenses);
 
-    
+    // Monthly Objects
     const monthNames = [ "January", "February", "March", "April", "May", "June",
       "July", "August", "September", "October", "November", "December" ];
 
-    this.allTransactions.reduce((acc: any, element: ExpenseItem) => {
-      const [ year, month ]:any = element.date?.split('-');
+    expenseList.reduce((acc: [month: ExpenseItem[], arr: ExpenseItem[]], element: ExpenseItem) => {
+      const [ year, month ]: string[] = element.date!.split('-');
+      
       // 'Month YY' format
-      const label = monthNames[+month - 1] + ' ' + year.slice(2);
+      const label: any = monthNames[+month - 1] + ' ' + year.slice(2);
       
       if (!acc[label]) acc[label] = [];
-      acc[label].push(element);
+      acc[label]!.push(element);
       return this.monthlyObject = acc;
     }, {});
-
+    
     const monthObjEntries = (name: string) => Object
       .entries(this.monthlyObject)
-      .map((arrForEachMonth: Array<any>) => arrForEachMonth[1].map((item: any) => item[name]));
+      .map((arrForEachMonth: [month: string, arr: ExpenseItem]) => arrForEachMonth[1]
+        .map((item: any) =>item[name]
+    ));
     
     this.monthlyNames = Object.keys(this.monthlyObject);
+    
     this.monthlyValues = monthObjEntries('amount');
     this.monthlyCategories = monthObjEntries('category');
   }
 
   private setChartBarData() {
-    const result = this.monthlyNames.map((month: string, mLength: number) => ({
+      const result: ChartsIfс[] = this.monthlyNames.map((month: string, mLength: number) => ({
       name: month,
-      series: this.monthlyCategories[mLength].map((category: string, cLength: number) => ({
+      series: (this.monthlyCategories[mLength] as any).map((category: string, cLength: number) => ({
         name: category,
         value: +this.monthlyValues[mLength][cLength]
       }))
@@ -101,7 +103,7 @@ export class ChartService {
   }
 
   private setChartPieData() {
-    let result: Array<any> = [];
+    const result: ChartsIfс[] = [];
     result.push( 
       {
         "name": "Receipts",
@@ -116,52 +118,43 @@ export class ChartService {
     this.chartPieData.next(result);
   }
 
-  private setChartAdvancedPieData() {
-    let result: Array<any> = [];
-    let subArray: Array<any> = [];  
-    let categories = this.allTransactions.map((item: ExpenseItem) => item.category);
+  private setChartAdvancedPieData(expenseList: ExpenseItem) {
 
-    for (let i = 0; i < categories.length; i++) {
-      let filtered = this.allTransactions.filter((item: ExpenseItem) => item.category === categories[i]);
-      subArray.push(
-        {
-        "name": categories[i],
-          "value": Math.abs(filtered
-            .map((item: ExpenseItem) => Number(item.amount)).reduce((acc: number, n: number)=> acc + n, 0))
-        }
-      ); 
-    };
-
-    [...new Set(categories)].forEach(item => result
-      .push( subArray.find(element => element.name === item))
-      );
-    
+    const result: ChartsIfс[] = expenseList.map((item: ExpenseItem) => ({
+      name: item.category,
+      value: Math.abs(item.amount!)
+    }));
     this.chartAdvancedPieData.next(result);
   }
 
-  private setChartNumberData() {
-    let result: Array<any> = [];
+  private setChartNumberData(expenseList: ExpenseItem[]) {
+    let result: ChartsIfс[] = [];
 
-    const transactions = this.allTransactions
-      .filter((item: any) => item.amount)
-      .map((transaction: any) => transaction.category);
+    const transactions = expenseList
+      .filter((item: ExpenseItem) => item.amount)
+      .map((transaction: ExpenseItem) => transaction.category);
 
-    const biggestReceipt = this.allTransactions
-      .filter((item: any) => item.amount > 0)
-      .map((value: any) => Number(value.amount));
+    const getBiggestReceipt = expenseList
+      .filter((item: ExpenseItem) => item.amount! > 0)
+      .map((value: ExpenseItem) => Number(value.amount));
   
-    const biggestExpense = this.allTransactions
-      .filter((item: any) => item.amount < 0)
-      .map((value: any) => Number(value.amount));
+    const getBiggestExpense = expenseList
+      .filter((item: ExpenseItem) => item.amount! < 0)
+      .map((value: ExpenseItem) => Number(value.amount)) || 0;
+
+    const setBiggestValue = (getBiggest: number[]) => {
+      if(getBiggest.length != 0) return Math.max.apply(Math, getBiggest) + ' $'
+      else return 0;
+    }
 
     result.push( 
       { 
         "name": "First Transaction",
-        "value": this.allTransactions[0].date 
+        "value": expenseList[0].date 
       },
       { 
         "name": "Last Transaction", 
-        "value": this.allTransactions[this.allTransactions.length -1].date 
+        "value": expenseList[expenseList.length -1].date 
       },
       { 
         "name": "Current Amount",
@@ -181,11 +174,11 @@ export class ChartService {
       },
       {
         "name": "Biggest receipt",
-        "value": Math.max.apply(Math, biggestReceipt) + ' $'
+        "value": setBiggestValue(getBiggestReceipt)
       },
       {
         "name": "Biggest expense",
-        "value": Math.min.apply(Math, biggestExpense) + ' $'
+        "value": setBiggestValue(getBiggestExpense)
       }
     )
 

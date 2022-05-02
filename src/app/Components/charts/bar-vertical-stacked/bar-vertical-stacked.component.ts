@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ChartService } from 'src/app/services/chart.service';
+import { ChartsIfс } from 'src/app/interfaces/charts';
+import { DataService } from 'src/app/services/chart.service';
 
 @Component({
   selector: 'app-bar-vertical-stacked',
@@ -8,18 +9,17 @@ import { ChartService } from 'src/app/services/chart.service';
 })
 export class BarVerticalStackedComponent implements OnInit {
 
-  data: Array<any> = [];
-
-  view: [number, number] = [700, 400];
+  data: ChartsIfс[] = [];
 
   // options
+  view: [number, number] = [700, 300];
   showXAxis: boolean = true;
   showYAxis: boolean = true;
-  gradient: boolean = false;
+  gradient: boolean = true;
   showLegend: boolean = true;
   showXAxisLabel: boolean = true;
-  xAxisLabel: string = 'Month';
   showYAxisLabel: boolean = true;
+  xAxisLabel: string = 'Month';
   yAxisLabel: string = 'Amount';
   animations: boolean = true;
 
@@ -27,9 +27,9 @@ export class BarVerticalStackedComponent implements OnInit {
     domain: ["#fd7f6f", "#7eb0d5", "#b2e061", "#bd7ebe", "#ffb55a", "#ffee65", "#beb9db", "#fdcce5", "#8bd3c7"]
   };
 
-  constructor(private chartService: ChartService) { }
+  constructor(private dataService: DataService) { }
   
   ngOnInit(): void {
-    this.chartService.chartBarData.subscribe((data: Array<any>) => this.data = data);
+    this.dataService.chartBarData.subscribe((data: ChartsIfс[]) => this.data = data);
   }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ChartService } from 'src/app/services/chart.service';
+import { DataService } from 'src/app/services/chart.service';
+import { ChartsIfс } from 'src/app/interfaces/charts';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,11 +10,14 @@ import { ChartService } from 'src/app/services/chart.service';
 export class DashboardComponent implements OnInit {
 
   constructor(
-    private chartService: ChartService) {
+    private dataService: DataService) {
   }
 
+  hasData: ChartsIfс[] = []; 
+
   ngOnInit() {
-    this.chartService.getallTransactions();
+    this.dataService.setChartsData();
+    this.dataService.chartPieData.subscribe((data: ChartsIfс[]) => this.hasData = data);
   }
 
 }

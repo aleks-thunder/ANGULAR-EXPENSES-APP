@@ -23,11 +23,15 @@ export class ExpenseService {
     return this.http.get(`${ENV.API_BASE_URL}/dashboard`).pipe(filter(Boolean));
   }
 
-  public updateExpense(itemId: any, item: ExpenseItem): Observable<ExpenseItem> {
-    return this.http.put(`${ENV.API_BASE_URL}/dashboard/${itemId}`, item).pipe(map((res: any) => res));
+  public updateExpense(itemId: string | undefined, item: ExpenseItem): Observable<ExpenseItem> {
+    return this.http.put(`${ENV.API_BASE_URL}/dashboard/${itemId}`, item).pipe(map((res: ExpenseItem) => res));
   }
 
   public deleteExpense(item: ExpenseItem): Observable<ExpenseItem> {
-    return this.http.delete(`${ENV.API_BASE_URL}/dashboard/${item._id}`).pipe(map((res: any) => res));
+    return this.http.delete(`${ENV.API_BASE_URL}/dashboard/${item._id}`).pipe(map((res: ExpenseItem) => res));
+  }
+
+  public deleteAllExpenses(): Observable<ExpenseItem> {
+    return this.http.delete(`${ENV.API_BASE_URL}/dashboard`).pipe(map((res: ExpenseItem) => res));
   }
 }

@@ -4,4 +4,11 @@ export interface ExpenseItem  {
   category?: string;
   description?: string;
   amount?: number;
+  
+  //methods
+  reduce?: any;
+  length?: number;
+  sort?: any;
+  filter?: any;
+  map?: any;
 }

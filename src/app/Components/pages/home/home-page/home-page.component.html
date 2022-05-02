@@ -1,11 +1,8 @@
 <div class="content">
-  <div class="graphic-header">
-    <h1>BUDGET TRACKER</h1>
-    <h3>February 2022</h3>
+  <h1>BUDGET TRACKER</h1>
     <h4>Balance: <span [ngClass]="{'red': currentAmount < 0, 'green': currentAmount > 0}">
         {{ currentAmount }} $
       </span></h4>
-  </div>
 
   <app-pie-chart></app-pie-chart>
   <app-categories></app-categories>

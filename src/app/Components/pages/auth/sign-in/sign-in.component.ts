@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { InputInterface } from 'src/app/interfaces/input';
+import { InputIfc } from 'src/app/interfaces/input';
 import { InputHTML } from 'src/app/helpers/input-html';
 import { ReactiveFormsBuilder } from 'src/app/helpers/form-bilders';
 import { AuthService } from 'src/app/services/http/auth.service';
@@ -18,8 +18,7 @@ export class SignInComponent implements OnInit{
   
   formLogin!: FormGroup;
   
-  inputLog: InputInterface[] = this.inputHTML.InputLog;
-
+  inputLog: InputIfc[] = this.inputHTML.InputLog;
 
   constructor(
     private auth: AuthService ,
@@ -27,7 +26,6 @@ export class SignInComponent implements OnInit{
     private reactiveFormsBuilder: ReactiveFormsBuilder,
     private router: Router,
     private notification: NotificationService
-
   ) { }
 
   ngOnInit(): void {
@@ -35,7 +33,7 @@ export class SignInComponent implements OnInit{
   }
 
   onLogin() {
-    this.auth.login(this.formLogin.value  ).subscribe(data => {
+    this.auth.login(this.formLogin.value ).subscribe(data => {
       this.auth.storeUserData(data.token, data.user);
       this.notification.msgSuccess('Login', 'Are are logged in !');
       this.router.navigate(['/'])

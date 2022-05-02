@@ -1,6 +1,7 @@
 .content {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
 
@@ -10,4 +11,14 @@
 
 .green {
   color: green;
+}
+
+app-categories {
+  position: relative;
+  top: -30px;
+}
+
+app-input {
+  position: relative;
+  top: 40px;
 }

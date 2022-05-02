@@ -8,7 +8,6 @@ import { BehaviorSubject } from 'rxjs';
 export class CategoryInputHelper {
 
   categoriesInput = new BehaviorSubject('');
-  // categoriesGet: Subject<CategoryInterface> = new BehaviorSubject<CategoryInterface>({});
 
   constructor() { }
 

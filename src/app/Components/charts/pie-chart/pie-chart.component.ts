@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ChartService } from 'src/app/services/chart.service';
+import { ChartsIfс } from 'src/app/interfaces/charts';
+import { DataService } from 'src/app/services/chart.service';
 // import { single } from './data';
 
 
@@ -10,25 +11,19 @@ import { ChartService } from 'src/app/services/chart.service';
 })
 export class PieChartComponent implements OnInit {
 
-  data: Array<any> = [];
-
+  data: ChartsIfс[] = [];
   view: [number, number] = [500, 300];
-
-  // options
+  showLabels: boolean = true;
   gradient: boolean = true;
-  showLegend: boolean = false;
-  isDoughnut: boolean = false;
-  legendPosition: any = 'below';
-
   colorScheme: any = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+    domain: ['#5AA454', '#A10A28']
   };
 
-  constructor(private chartService: ChartService) {
+  constructor(private dataService: DataService) {
   }
 
   ngOnInit(): void {
-    this.chartService.chartPieData.subscribe((data: Array<any>) => this.data = data);
+    this.dataService.chartPieData.subscribe((data: ChartsIfс[]) => this.data = data);
   }
  
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { InputInterface } from '../interfaces/input';
+import { InputIfc } from '../interfaces/input';
 
 @Injectable({
   providedIn: 'root'
@@ -7,19 +7,19 @@ import { InputInterface } from '../interfaces/input';
 
 export class InputHTML {
 
-  inputComponent: InputInterface[] = [
+  inputComponent: InputIfc[] = [
     { label: 'Category',     type:'text',    form:'category' },
     { label: 'Description',  type:'text',    form:'description' },
     { label: 'Amount',       type:'number',  form:'amount' },
     { label: 'Datepicker',   type:'text',    form:'date' }
   ];
 
-  InputLog: InputInterface[] = [
+  InputLog: InputIfc[] = [
     { label: 'Login',    type:'text', form:'login' },
     { label: 'Password', type:'text', form:'password' }
   ];
   
-  inputReg: InputInterface[] = [
+  inputReg: InputIfc[] = [
     { label: 'Name',     type:'text',     form:'name' },
     { label: 'Login',    type:'text',     form:'login' },
     { label: 'Email',    type:'email',    form:'email' },

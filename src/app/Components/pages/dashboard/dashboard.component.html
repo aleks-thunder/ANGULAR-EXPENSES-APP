@@ -1,9 +1,14 @@
-<!-- <app-ngx-charts></app-ngx-charts> -->
-<div class="charts">
-  <app-number-chart></app-number-chart>
-  <div class="lined-charts">
-    <app-bar-vertical-stacked class="mx-5"></app-bar-vertical-stacked>
-    <app-advanced-pie class="ml-5"></app-advanced-pie>
+<div *ngIf="this.hasData.length != 0">
+  <div class="charts">
+    <app-number-chart></app-number-chart>
+    <div class="inline-charts">
+      <app-advanced-pie></app-advanced-pie>
+      <app-bar-vertical-stacked></app-bar-vertical-stacked>
+    </div>
   </div>
+  <app-expenses></app-expenses>
 </div>
-<app-expenses></app-expenses>
+
+<div class="else" *ngIf="this.hasData.length == 0">
+  <span>Input some expenses please ;)</span>  
+</div>

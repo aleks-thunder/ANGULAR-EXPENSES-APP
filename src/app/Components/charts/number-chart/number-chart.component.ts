@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ChartService } from 'src/app/services/chart.service';
+import { ChartsIfс } from 'src/app/interfaces/charts';
+import { DataService } from 'src/app/services/chart.service';
 
 @Component({
   selector: 'app-number-chart',
@@ -8,20 +9,21 @@ import { ChartService } from 'src/app/services/chart.service';
 })
 export class NumberChartComponent implements OnInit {
 
-  data: Array<any> = [];
+  data: ChartsIfс[] = [];
 
   view: [number, number] = [1800, 150];
   animations: boolean = false;
   colorScheme: any = {
     domain: ["#e60049", "#0bb4ff", "#50e991", "#e6d800", "#9b19f5", "#ffa300", "#dc0ab4", "#b3d4ff", "#00bfa0"]
   };
-  cardColor: string = '#2f2e29';
+  cardColor: string = '#f4ff4db3';
+  textColor: string = 'black';
 
-  constructor(private chartService: ChartService) {
+  constructor(private dataService: DataService) {
   }
 
   ngOnInit(): void {
-    this.chartService.chartNumberData.subscribe((data: Array<any>) => this.data = data)
+    this.dataService.chartNumberData.subscribe((data: ChartsIfс[]) => this.data = data)
   }
 
 }

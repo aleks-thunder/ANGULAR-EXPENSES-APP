@@ -5,10 +5,7 @@
     <form [formGroup]="formRegister" (ngSubmit)="onSignUp()">
       <mat-form-field appearance="legacy" *ngFor="let item of inputReg">
         <mat-label>{{ item.label }}</mat-label>
-
-        <!-- <input matInput type={{item.type}} formControlName={{item.form}} *ngIf="!(item.form == 'passwordVisible')"> -->
         <input matInput type={{item.type}} formControlName={{item.form}}>
-
       </mat-form-field>
 
       <button 

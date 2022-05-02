@@ -9,13 +9,13 @@ import { faInstagram, faGit, faLinkedin } from '@fortawesome/free-brands-svg-ico
 })
 export class BottomLinksComponent implements OnInit {
 
+  faPaperPlane = faPaperPlane;
   faUserCircle = faUserCircle
   faInstagram = faInstagram;
-  faPaperPlane = faPaperPlane;
+  faLinkedin = faLinkedin;
   faEnvelope = faEnvelope;
   faPalette = faPalette;
   faGit = faGit;
-  faLinkedin = faLinkedin;
 
   ngOnInit(): void {
   }

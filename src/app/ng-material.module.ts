@@ -25,7 +25,6 @@ const MaterialComponents = [
   MatDialogModule,
   MatCardModule,
   MatChipsModule,
-  MatProgressBarModule,
   MatTabsModule,
   MatSelectModule
 ]

@@ -19,6 +19,8 @@ router.put('/dashboard/:id', passport.authenticate('jwt', {session: false}), exp
 
 router.delete('/dashboard/:id', passport.authenticate('jwt', {session: false}), expense.deleteExpenses);
 
+router.delete('/dashboard', passport.authenticate('jwt', {session: false}), expense.deleteAllExpenses);
+
 
 /** CATEGORIES ROUTER */
 router.post('/categories', passport.authenticate('jwt', {session: false}), categories.saveCategories);

@@ -5,12 +5,9 @@ import { SignUpComponent } from './Components/pages/auth/sign-up/sign-up.compone
 
 import { DashboardComponent } from './Components/pages/dashboard/dashboard.component';
 import { HomePageComponent } from './Components/pages/home/home-page/home-page.component';
-import { EditItemModalComponent } from './Components/transactions/edit-item-modal/edit-item-modal.component';
 import { AuthGuard } from './guard/auth.guard';
 
-
 const routes: Routes = [
-  // { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '',           component: HomePageComponent, canActivate: [AuthGuard]},
   { path: 'login',      component: SignInComponent },
   { path: 'register',   component: SignUpComponent },

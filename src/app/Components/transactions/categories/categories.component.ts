@@ -1,11 +1,10 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatChip } from '@angular/material/chips';
-import { CategoryInterface } from 'src/app/interfaces/category';
+import { CategoryIfc } from 'src/app/interfaces/category';
 import { CategoryInputHelper } from 'src/app/shared/category-input-helper';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { CategoriesService } from 'src/app/services/http/categories.service';
-import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-categories',
@@ -17,12 +16,11 @@ import { NotificationService } from 'src/app/services/notification.service';
 
 export class CategoriesComponent implements OnInit {
 
-  categories!: CategoryInterface[]
+  categories!: CategoryIfc[]
 
   constructor(
     private categoryInputHelper: CategoryInputHelper,
     private categoryService: CategoriesService,
-    private notification: NotificationService
   ) {}
 
   ngOnInit(): void { 
@@ -30,7 +28,7 @@ export class CategoriesComponent implements OnInit {
   };
   
 
-  onSaveCategories(categories: any) {
+  onSaveCategories(categories: CategoryIfc[]) {
     this.categoryService.saveCategories(categories)
   };
 
@@ -40,7 +38,7 @@ export class CategoriesComponent implements OnInit {
     event.chipInput!.clear();
   };
 
-  removeCategory(category: CategoryInterface): void {
+  removeCategory(category: CategoryIfc): void {
     const index: number = this.categories.indexOf(category);
     this.categories.splice(index, 1);
   };
