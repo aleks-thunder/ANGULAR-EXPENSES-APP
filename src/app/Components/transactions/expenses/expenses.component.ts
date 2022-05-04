@@ -113,7 +113,8 @@ export class ExpenseRowComponent implements OnInit {
   deleteAll() {
     this.expenseService.deleteAllExpenses().subscribe(() => {
       this.notification.msgSuccess('Expenses','All Expenses deleted');
-      this.router.navigate(['/']);
+      this.router.navigate(['/'])
+        .then(() => window.location.reload());
     },
     error => console.log(error)
     );
