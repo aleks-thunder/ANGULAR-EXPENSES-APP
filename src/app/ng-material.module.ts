@@ -10,11 +10,10 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog'
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSelectModule } from '@angular/material/select';
 
-const MaterialComponents = [
+const MaterialModules = [
   MatButtonModule,
   MatInputModule,
   MatFormFieldModule,
@@ -30,7 +29,7 @@ const MaterialComponents = [
 ]
 
 @NgModule({
-  imports: [ MaterialComponents ],
-  exports: [ MaterialComponents ]
+  imports: [ MaterialModules ],
+  exports: [ MaterialModules ]
 })
 export class NgMaterialModule { }

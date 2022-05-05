@@ -9,6 +9,7 @@ const ENV = environment;
 @Injectable({
   providedIn: 'root'
 })
+
 export class CategoriesService {
 
   constructor(
@@ -17,12 +18,12 @@ export class CategoriesService {
     ) {
   }
 
-  private saveCategoriestoDB(data: CategoryIfc): Observable<CategoryIfc> {
-    return this.http.post(`${ENV.API_BASE_URL}/categories`, data);
+  private saveCategoriestoDB(data: CategoryIfc[]): Observable<CategoryIfc[]> {
+    return this.http.post<CategoryIfc[]>(`${ENV.API_BASE_URL}/categories`, data);
   }
 
-  private getFromDB(): Observable<CategoryIfc> {
-    return this.http.get(`${ENV.API_BASE_URL}/categories`)
+  private getFromDB(): Observable<CategoryIfc[]> {
+    return this.http.get<CategoryIfc[]>(`${ENV.API_BASE_URL}/categories`)
   }
 
   public getCategories() {
@@ -34,11 +35,11 @@ export class CategoriesService {
       { name: 'Investments'},
     ]
 
-    this.getFromDB().subscribe((res: object) => {
+    this.getFromDB().subscribe(res => {
 
-      ( Array.isArray(res) && res.length) 
-        ? res.forEach((categoryName: string) => categories.push({'name': categoryName}))
-        :categories.push(...defaultCategories);
+      res.length > 0
+        ? res.forEach((category: CategoryIfc) => categories.push({'name': category.name}))
+        : categories.push(...defaultCategories);
 
       }, err => console.log(err)
     );
@@ -48,12 +49,10 @@ export class CategoriesService {
 
   public saveCategories(categories: CategoryIfc[]) {
     //prep obj for DB format
-    let serverObject: CategoryIfc = [];
-    categories.forEach( (element: CategoryIfc) => serverObject.push(element.name) );
+    let categoriesArr: CategoryIfc[] = [];
+    categories.forEach( (element: CategoryIfc) => categoriesArr.push(element));
     
-    console.log(serverObject);
-    
-    this.saveCategoriestoDB(serverObject).subscribe( () => {
+    this.saveCategoriestoDB(categoriesArr).subscribe( () => {
         this.notification.msgSuccess('Categories', 'Categories saved at database');
       }, err => this.notification.msgError('Categories', 'Ooops, something went wrong')
     );

@@ -9,9 +9,5 @@ import { LoaderService } from './services/loader.service';
 export class AppComponent {
 
   constructor(public loader: LoaderService) { }
-  ngOnInit(): void {
-    this.loader.isLoading.next(true)
-  }
-
 
 }

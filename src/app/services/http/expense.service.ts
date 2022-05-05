@@ -16,22 +16,22 @@ export class ExpenseService {
   }
 
   public addExpense(data: ExpenseItem): Observable<ExpenseItem> {
-    return this.http.post(ENV.API_BASE_URL, data);
+    return this.http.post<ExpenseItem>(ENV.API_BASE_URL, data);
   }
 
-  public getExpense(): Observable<ExpenseItem> {
-    return this.http.get(`${ENV.API_BASE_URL}/dashboard`).pipe(filter(Boolean));
+  public getExpense(): Observable<ExpenseItem[]> { // expenses
+    return this.http.get<ExpenseItem[]>(`${ENV.API_BASE_URL}/dashboard`).pipe(filter(Boolean));
   }
 
-  public updateExpense(itemId: string | undefined, item: ExpenseItem): Observable<ExpenseItem> {
-    return this.http.put(`${ENV.API_BASE_URL}/dashboard/${itemId}`, item).pipe(map((res: ExpenseItem) => res));
+  public updateExpense(itemId = '', item: ExpenseItem): Observable<ExpenseItem> {
+    return this.http.put<ExpenseItem>(`${ENV.API_BASE_URL}/dashboard/${itemId}`, item);
   }
 
   public deleteExpense(item: ExpenseItem): Observable<ExpenseItem> {
-    return this.http.delete(`${ENV.API_BASE_URL}/dashboard/${item._id}`).pipe(map((res: ExpenseItem) => res));
+    return this.http.delete<ExpenseItem>(`${ENV.API_BASE_URL}/dashboard/${item._id}`);
   }
 
-  public deleteAllExpenses(): Observable<ExpenseItem> {
-    return this.http.delete(`${ENV.API_BASE_URL}/dashboard`).pipe(map((res: ExpenseItem) => res));
+  public deleteAllExpenses(): Observable<ExpenseItem[]> {
+    return this.http.delete<ExpenseItem[]>(`${ENV.API_BASE_URL}/dashboard`);
   }
 }

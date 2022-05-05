@@ -30,8 +30,7 @@ import { DashboardComponent } from './Components/pages/dashboard/dashboard.compo
 import { SignUpComponent } from './Components/pages/auth/sign-up/sign-up.component';
 import { SignInComponent } from './Components/pages/auth/sign-in/sign-in.component';
 import { NavbarComponent } from './Components/navbar/navbar.component';
-import { InterceptorService } from './services/http/interceptor.service';
-
+import { AuthInterceptor } from './interceptors/auth-interceptor';
 import { PieChartComponent } from './Components/charts/pie-chart/pie-chart.component';
 import { BarVerticalStackedComponent } from './Components/charts/bar-vertical-stacked/bar-vertical-stacked.component';
 import { AdvancedPieComponent } from './Components/charts/advanced-pie/advanced-pie.component';
@@ -86,7 +85,7 @@ import { LoaderComponent } from './Components/loader/loader.component';
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: InterceptorService,
+      useClass: AuthInterceptor,
       multi: true
     }
   ],
