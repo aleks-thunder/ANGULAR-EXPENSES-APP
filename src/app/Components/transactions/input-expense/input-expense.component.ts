@@ -18,9 +18,9 @@ import { DataService } from 'src/app/services/chart.service';
 const dateFormat = { display: { dateInput: 'll', monthYearLabel: 'MMMM YYYY' } };
 
 @Component({
-  selector: 'app-input',
-  templateUrl: './input.component.html',
-  styleUrls: ['./input.component.scss'],
+  selector: 'app-input-expense',
+  templateUrl: './input-expense.component.html',
+  styleUrls: ['./input-expense.component.scss'],
   providers: [
     {
       provide: DateAdapter,
@@ -34,7 +34,7 @@ const dateFormat = { display: { dateInput: 'll', monthYearLabel: 'MMMM YYYY' } }
   ],
 })
 
-export class InputComponent implements OnInit {
+export class InputExpenseComponent implements OnInit {
   
   faPen = faPen;
   

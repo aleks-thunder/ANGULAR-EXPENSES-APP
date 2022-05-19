@@ -4,11 +4,11 @@ import { SignInComponent } from './Components/pages/auth/sign-in/sign-in.compone
 import { SignUpComponent } from './Components/pages/auth/sign-up/sign-up.component';
 
 import { DashboardComponent } from './Components/pages/dashboard/dashboard.component';
-import { HomePageComponent } from './Components/pages/home/home-page/home-page.component';
+import { HomeComponent } from './Components/pages/home/home.component';
 import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
-  { path: '',           component: HomePageComponent, canActivate: [AuthGuard]},
+  { path: '',           component: HomeComponent, canActivate: [AuthGuard]},
   { path: 'login',      component: SignInComponent },
   { path: 'register',   component: SignUpComponent },
   { path: 'dashboard',  component: DashboardComponent, canActivate: [AuthGuard] },

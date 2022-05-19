@@ -21,7 +21,7 @@ import { EditItemModalComponent } from '../edit-item-modal/edit-item-modal.compo
 })
 
 
-export class ExpenseRowComponent implements OnInit {
+export class ExpenseComponent implements OnInit {
 
   categories!: CategoryIfc[];
   expenseList: ExpenseItem = [];
@@ -33,8 +33,7 @@ export class ExpenseRowComponent implements OnInit {
   totalLength: number = 0;
   page: number = 1;
 
-  dateClickCount: number = 0;
-  amountClickCount: number = 0;
+  sortClickCount: number = 0;
 
   searchValue: string = '';
 
@@ -86,7 +85,7 @@ export class ExpenseRowComponent implements OnInit {
     error => this.notification.msgError('Expense',error.error.error))
   }
 
-  sorting( prop: string, isTrue: boolean ){
+  private sorting( prop: string, isTrue: boolean ){
     if(isTrue) return (bigger: SortingIfc, smaller: SortingIfc) => 
       bigger[prop] == smaller[prop] ? 0 : bigger[prop] > smaller[prop] ? -1 : 1;
 
@@ -95,9 +94,9 @@ export class ExpenseRowComponent implements OnInit {
   }
 
   sortBy(prop: string) {
-    this.dateClickCount += 1;
+    this.sortClickCount += 1;
 
-    this.dateClickCount % 2 === 0
+    this.sortClickCount % 2 === 0
     ? this.expenseList.sort(this.sorting(prop ,true))
     : this.expenseList.sort(this.sorting(prop , false));
   }

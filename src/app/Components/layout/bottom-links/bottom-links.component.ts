@@ -7,6 +7,7 @@ import { faInstagram, faGit, faLinkedin } from '@fortawesome/free-brands-svg-ico
   templateUrl: './bottom-links.component.html',
   styleUrls: ['./bottom-links.component.scss']
 })
+
 export class BottomLinksComponent implements OnInit {
 
   faPaperPlane = faPaperPlane;

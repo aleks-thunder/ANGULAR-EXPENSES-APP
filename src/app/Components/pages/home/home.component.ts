@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/services/chart.service';
 
 @Component({
-  selector: 'app-home-page',
-  templateUrl: './home-page.component.html',
-  styleUrls: ['./home-page.component.scss']
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss']
 })
-export class HomePageComponent implements OnInit {
+export class HomeComponent implements OnInit {
 
   currentAmount: number = 0;
 

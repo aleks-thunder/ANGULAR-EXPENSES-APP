@@ -20,16 +20,17 @@ const MaterialModules = [
   MatIconModule,
   MatDatepickerModule,
   MatNativeDateModule,
-  MatMenuModule,
   MatDialogModule,
   MatCardModule,
   MatChipsModule,
   MatTabsModule,
-  MatSelectModule
+  MatSelectModule,
+  MatMenuModule
 ]
 
 @NgModule({
   imports: [ MaterialModules ],
   exports: [ MaterialModules ]
 })
+
 export class NgMaterialModule { }

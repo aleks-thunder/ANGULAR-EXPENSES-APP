@@ -1,12 +1,15 @@
 <div class="content">
   <h1>BUDGET TRACKER</h1>
-    <h4>Balance: <span [ngClass]="{'red': currentAmount < 0, 'green': currentAmount > 0}">
+    <h4>Balance: 
+      <span 
+        [ngClass]="{'red': currentAmount < 0, 'green': currentAmount > 0}">
         {{ currentAmount }} $
       </span></h4>
 
   <app-pie-chart></app-pie-chart>
+
   <app-categories></app-categories>
 
-  <app-input></app-input>
+  <app-input-expense></app-input-expense>
 
 </div>

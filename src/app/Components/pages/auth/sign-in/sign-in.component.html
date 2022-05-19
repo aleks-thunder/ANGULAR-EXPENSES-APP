@@ -11,15 +11,13 @@
         <input 
           *ngIf="item.label == 'Login'" 
           matInput type={{item.type}} 
-          formControlName={{item.form}}
-        >
+          formControlName={{item.form}}>
 
         <input 
           *ngIf="item.label == 'Password'" 
           matInput 
           [type]="hide ? 'password' : 'text'" 
-          formControlName={{item.form}}
-        >
+          formControlName={{item.form}}>
         
         <button 
           *ngIf="item.label == 'Password'" 
