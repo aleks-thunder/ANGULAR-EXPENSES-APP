@@ -17,10 +17,15 @@ import { SignUpComponent } from '../Components/pages/auth/sign-up/sign-up.compon
 import { InputExpenseComponent } from '../Components/transactions/input-expense/input-expense.component';
 import { CategoriesComponent } from '../Components/transactions/categories/categories.component';
 import { ExpenseComponent } from '../Components/transactions/expenses/expenses.component';
-import { EditItemModalComponent } from '../Components/transactions/edit-item-modal/edit-item-modal.component';
+import { EditItemComponent } from '../Components/dialog/edit-item/edit-item.component';
+import { DeleteConfirmationComponent } from '../Components/dialog/delete-confirmation/delete-confirmation.component';
 
 // Pipe
 import { FilterPipe } from '../Pipes/filter.pipe';
+
+// Directives
+import { ExpenseZoomDirective } from '../directives/expense-zoom.directive';
+import { ExpenseColorDirective } from '../directives/expense-color.directive';
 
 
 const Components = [
@@ -28,11 +33,14 @@ const Components = [
   SignInComponent,
   SignUpComponent,
   InputExpenseComponent,
-  EditItemModalComponent,
+  EditItemComponent,
   CategoriesComponent,
   DashboardComponent,
   ExpenseComponent,
-  FilterPipe
+  FilterPipe,
+  ExpenseZoomDirective,
+  ExpenseColorDirective,
+  DeleteConfirmationComponent
 ]
 
 const Modules = [

@@ -16,9 +16,9 @@ import { DataService } from 'src/app/services/chart.service';
 const dateFormat = { display: { dateInput: 'll', monthYearLabel: 'MMMM YYYY' } };
 
 @Component({
-  selector: 'app-edit-item-modal',
-  templateUrl: './edit-item-modal.component.html',
-  styleUrls: ['./edit-item-modal.component.scss'],
+  selector: 'app-edit-item',
+  templateUrl: './edit-item.component.html',
+  styleUrls: ['./edit-item.component.scss'],
   providers: [
     {
       provide: DateAdapter,
@@ -32,7 +32,7 @@ const dateFormat = { display: { dateInput: 'll', monthYearLabel: 'MMMM YYYY' } }
   ],
 })
 
-export class EditItemModalComponent implements OnInit {
+export class EditItemComponent implements OnInit {
 
   categories!: CategoryIfc[]
 
@@ -46,7 +46,7 @@ export class EditItemModalComponent implements OnInit {
 
   constructor(  
     @Inject(MAT_DIALOG_DATA) public oldExpense: ExpenseItem,
-    public dialogRef: MatDialogRef<EditItemModalComponent>,
+    public dialogRef: MatDialogRef<EditItemComponent>,
     private reactiveFormsBuilder: ReactiveFormsBuilder,
     private expenseService: ExpenseService,
     private notification: NotificationService,

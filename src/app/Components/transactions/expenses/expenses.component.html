@@ -14,7 +14,7 @@
 
   <button class="m-1 btn btn-outline-success"   (click)="sortBy('amount')">Amount</button>
   <button class="m-1 btn btn-outline-info"      (click)="sortByDefault()">Default</button>
-  <button class="m-1 btn btn-outline-danger"    (click)="deleteAll()">Delete All</button>
+  <button class="m-1 btn btn-outline-danger"    (click)="deleteAllDialog()">Delete All</button>
   <input type="text" class="form-control" [(ngModel)]="searchValue" placeholder="Search..."/>
 </div>
 
@@ -28,7 +28,9 @@
       currentPage: page,
       totalItems: totalLength
     }"
-  [ngClass]="{ 'receipt': exp.amount >= 0, 'expense': exp.amount < 0 }">
+    [expenseColor]="exp.amount"
+    expenseZoom
+    >
   
   <div class="col-2">            {{ exp.date | date:'MMM d, y' }}</div>
   <div class="col-2 border-left">{{ exp.category }}</div>
@@ -40,7 +42,7 @@
       class="btn-edit mx-1"
       mat-mini-fab
       color="primary"
-      (click)="onEditBtn(exp)">
+      (click)="onEditItemDialog(exp)">
       <fa-icon [icon]="faPenSquare"></fa-icon>
     </button>
 
@@ -48,7 +50,7 @@
       class="btn-delete"
       mat-mini-fab
       color="warn"
-      (click)="onDelBtn(exp)">
+      (click)="onDelItemBtn(exp)">
       <fa-icon [icon]="faTrash"></fa-icon>
     </button>
   </div>

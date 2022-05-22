@@ -26,5 +26,4 @@ export class PieChartComponent implements OnInit {
     this.dataService.chartPieData.subscribe((data: ChartsIfс[]) => this.data = data);
   }
  
-
 }

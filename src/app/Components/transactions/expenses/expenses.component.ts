@@ -7,12 +7,13 @@ import { faPenSquare } from '@fortawesome/free-solid-svg-icons';
 import { CategoryIfc } from 'src/app/interfaces/category';
 
 import { ExpenseItem } from 'src/app/interfaces/expense-item';
-import { SortingIfc } from 'src/app/interfaces/sotring';
 import { DataService } from 'src/app/services/chart.service';
+import { DialogService } from 'src/app/services/dialog.service';
 import { CategoriesService } from 'src/app/services/http/categories.service';
 import { ExpenseService } from 'src/app/services/http/expense.service';
 import { NotificationService } from 'src/app/services/notification.service';
-import { EditItemModalComponent } from '../edit-item-modal/edit-item-modal.component';
+import { SortingService } from 'src/app/services/sorting.service';
+import { EditItemComponent } from '../../dialog/edit-item/edit-item.component';
 
 @Component({
   selector: 'app-expenses',
@@ -23,7 +24,7 @@ import { EditItemModalComponent } from '../edit-item-modal/edit-item-modal.compo
 
 export class ExpenseComponent implements OnInit {
 
-  categories!: CategoryIfc[];
+  categories: CategoryIfc[] = [];
   expenseList: ExpenseItem = [];
   expenseListCopy: ExpenseItem = [];
 
@@ -43,14 +44,16 @@ export class ExpenseComponent implements OnInit {
     private router: Router,
     private categoryService: CategoriesService,
     private notification: NotificationService,
-    private dataService: DataService
+    private dataService: DataService,
+    private sortServ: SortingService,
+    private dialogService: DialogService
     ) { }
 
   ngOnInit(): void {
     this.getExpenses();
     this.categories = this.categoryService.getCategories();
   }
-
+  
   private getExpenses() {
     this.expenseService.getExpense().subscribe((getExpenses: ExpenseItem ) => {
       this.expenseList = getExpenses;
@@ -60,63 +63,55 @@ export class ExpenseComponent implements OnInit {
        error => console.log(error));
   }
 
-  onEditBtn( item: ExpenseItem ) {
-    this.router.navigate([], {queryParams: [item._id]});
-    const dialogRef = this.dialog.open(EditItemModalComponent, {
-      width: '500px',
-      height: '650px',
-      data: item
-    });
+  sortBy(prop: string) {
+    this.sortServ.sortBy( prop, this.expenseList )
+  }
 
-    dialogRef.afterClosed().subscribe(result => {
+  sortByCategory( category: string | undefined ) {
+    this.expenseList = this.sortServ.sortByCategory( this.expenseList, this.expenseListCopy, category )
+  }
+
+  sortByDefault() {
+    this.sortServ.sortByDefault( this.getExpenses() )
+  }
+
+  onEditItemDialog( item: ExpenseItem,  ) {
+    this.router.navigate([], {queryParams: [item._id]});
+
+    this.dialogService.editItemDialog(item).afterClosed().subscribe(result => {
       this.getExpenses();
     })
   }
   
-  onDelBtn( item: ExpenseItem ) {
-    
-    this.expenseService.deleteExpense(item).subscribe(() => {
+  onDelItemBtn( item: ExpenseItem ) {
+    this.expenseService.deleteExpense( item ).subscribe(() => {
       this.notification.msgSuccess('Expense','Expense deleted');
       this.getExpenses();
       this.dataService.setChartsData();
-      if(this.expenseList.length == 1) this.router.navigate(['/'])
+      if( this.expenseList.length == 1 ) this.router.navigate(['/'])
         .then(() => window.location.reload());
     },
     error => this.notification.msgError('Expense',error.error.error))
   }
 
-  private sorting( prop: string, isTrue: boolean ){
-    if(isTrue) return (bigger: SortingIfc, smaller: SortingIfc) => 
-      bigger[prop] == smaller[prop] ? 0 : bigger[prop] > smaller[prop] ? -1 : 1;
-
-    else return (smaller: SortingIfc, bigger: SortingIfc) => 
-      smaller[prop] == bigger[prop] ? 0 : smaller[prop] < bigger[prop] ? -1 : 1;
-  }
-
-  sortBy(prop: string) {
-    this.sortClickCount += 1;
-
-    this.sortClickCount % 2 === 0
-    ? this.expenseList.sort(this.sorting(prop ,true))
-    : this.expenseList.sort(this.sorting(prop , false));
-  }
-
-  sortByCategory( category: string | undefined ) {
-    this.expenseList = this.expenseListCopy.filter((items: ExpenseItem) => items.category === category);
-  }
-
-  sortByDefault() {
-    return this.getExpenses();
-  }
-
-  deleteAll() {
-    this.expenseService.deleteAllExpenses().subscribe(() => {
-      this.notification.msgSuccess('Expenses','All Expenses deleted');
-      this.router.navigate(['/'])
-        .then(() => window.location.reload());
-    },
-    error => console.log(error)
-    );
+  deleteAllDialog() {
+    this.dialogService.confirmDialog({
+      title: 'Are you sure?',
+      message: 'Are you sure you want to do this?',
+      confirmCaption: 'Yes',
+      cancelCaption: 'No',
+    })
+    .subscribe((yes) => {
+      if(yes) {
+        this.expenseService.deleteAllExpenses().subscribe(() => {
+          this.notification.msgSuccess('Expenses','All Expenses deleted');
+          this.router.navigate(['/'])
+            .then(() => window.location.reload());
+        },
+        error => console.log(error)
+        );
+      }
+    });
   }
 
 }
