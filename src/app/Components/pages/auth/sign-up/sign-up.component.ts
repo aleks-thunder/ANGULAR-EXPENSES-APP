@@ -7,7 +7,6 @@ import { AuthService } from 'src/app/services/http/auth.service';
 import { Router } from '@angular/router';
 import { NotificationService } from 'src/app/services/notification.service';
 import { FormGroup } from '@angular/forms';
-import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -25,15 +24,11 @@ export class SignUpComponent implements OnInit {
     private inputHTML: InputHTML,
     private reactiveFormsBuilder: ReactiveFormsBuilder,
     private router: Router,
-    private notification: NotificationService,
-    private loader: LoaderService
-
+    private notification: NotificationService
   ) { }
 
   ngOnInit(): void {
     this.formRegister = this.reactiveFormsBuilder.formRegister;
-    this.loader.isLoading.next(true);
-    setTimeout(() => this.loader.isLoading.next(false), 500);
   }
 
   onSignUp(): void {

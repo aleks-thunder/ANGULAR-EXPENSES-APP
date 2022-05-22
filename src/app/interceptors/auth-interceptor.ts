@@ -15,7 +15,7 @@ export class AuthInterceptor implements HttpInterceptor{
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const idToken = localStorage.getItem('access_token');
 
-    this.loader.isLoading.next(true);
+    this.loader.start();
 
     if(idToken) {
       const cloned = req.clone({
@@ -23,13 +23,13 @@ export class AuthInterceptor implements HttpInterceptor{
       });
       return next.handle(cloned).pipe(
         finalize( () => setTimeout(() => {
-          this.loader.isLoading.next(false)
+          this.loader.stop()
         }, 200))
       );
     } else {
       return next.handle(req).pipe(
         finalize( () => setTimeout(() => {
-          this.loader.isLoading.next(false)
+          this.loader.reset()
         }, 200))
       );
     }
