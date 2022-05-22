@@ -1,4 +1,4 @@
-<div *ngIf="this.hasData.length != 0">
+<div *ngIf="this.hasData > 0">
   <div class="charts">
     <app-number-chart></app-number-chart>
     <div class="inline-charts">
@@ -9,6 +9,6 @@
   <app-expenses></app-expenses>
 </div>
 
-<div class="else" *ngIf="this.hasData.length == 0">
-  <span>Input some expenses please ;)</span>  
+<div class="else" *ngIf="this.hasData < 0">
+  <span>Input some expenses please ;)</span>
 </div>

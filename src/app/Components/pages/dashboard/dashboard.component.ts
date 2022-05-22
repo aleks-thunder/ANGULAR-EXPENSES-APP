@@ -13,11 +13,20 @@ export class DashboardComponent implements OnInit {
     private dataService: DataService) {
   }
 
-  hasData: ChartsIfс[] = []; 
+  hasData: number = 0;
 
-  ngOnInit() {
+  ngOnInit():void {
     this.dataService.setChartsData();
-    this.dataService.chartPieData.subscribe((data: ChartsIfс[]) => this.hasData = data);
+    setTimeout(() => {
+       this.dataService.chartPieData.subscribe((data: ChartsIfс[]) => {
+        data.length > 0 
+          ? this.show(1)
+          : this.show(-1);
+       });
+    }, 500);
   }
 
+  show(data: number): number {
+    return this.hasData = data;
+  }
 }
