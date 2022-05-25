@@ -18,11 +18,9 @@ export class DashboardComponent implements OnInit {
   ngOnInit():void {
     this.dataService.setChartsData();
     setTimeout(() => {
-       this.dataService.chartPieData.subscribe((data: ChartsIfс[]) => {
-        data.length > 0 
-          ? this.show(1)
-          : this.show(-1);
-       });
+      this.dataService.chartPieData.subscribe((data: ChartsIfс[]) => {
+        data.length > 0 ? this.show(1) : this.show(-1);
+      });
     }, 500);
   }
 

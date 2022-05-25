@@ -60,15 +60,14 @@ export class InputExpenseComponent implements OnInit {
   }
 
   onSubmit() {
-    this.expenseService.addExpense(this.inputForm.value).subscribe((response: ExpenseItem) => {
-      this.notification.msgSuccess('Expense','Expense created !');
-      this.inputForm.controls['description'].reset();
-      this.inputForm.controls['amount'].reset();
-      this.dataService.setChartsData();
-    },
-    error => {
-      this.notification.msgError('Expense',error.error.error)
-      console.log(error);
+    this.expenseService.addExpense(this.inputForm.value).subscribe({
+      next: () => {
+        this.notification.msgSuccess('Expense','Expense created !');
+        this.inputForm.controls['description'].reset();
+        this.inputForm.controls['amount'].reset();
+        this.dataService.setChartsData();
+      },
+      error: error => this.notification.msgError('Expense',error.error.error)
     }
     );
   }

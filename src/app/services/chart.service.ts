@@ -43,8 +43,7 @@ export class DataService {
         this.setChartAdvancedPieData(expenseList);
         this.setChartNumberData(expenseList);
       }
-    },
-    error => console.log(error));
+    })
   }
 
   private getValues(expenseList: ExpenseItem) {

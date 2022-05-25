@@ -33,16 +33,14 @@ export class SignInComponent implements OnInit{
   }
 
   onLogin() {
-    this.auth.login(this.formLogin.value ).subscribe(data => {
-      this.auth.storeUserData(data.token, data.user);
-      this.notification.msgSuccess('Login', 'Are are logged in !');
-      this.router.navigate(['/'])
-    },
-    error => {
-      this.notification.msgError('Registration',error.error.error);
-      console.log(error);
-    }
-    );
+    this.auth.login(this.formLogin.value ).subscribe({
+      next: (data) => {
+        this.auth.storeUserData(data.token, data.user);
+        this.notification.msgSuccess('Login', 'Are are logged in !');
+        this.router.navigate(['/'])
+      },
+      error: error => this.notification.msgError('Registration',error.error.error)
+    });
   }
 
 }

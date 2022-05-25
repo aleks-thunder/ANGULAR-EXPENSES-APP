@@ -36,12 +36,10 @@ export class CategoriesService {
     ]
 
     this.getFromDB().subscribe(res => {
-
       res.length > 0
         ? res.forEach((category: CategoryIfc) => categories.push({'name': category.name}))
         : categories.push(...defaultCategories);
-
-      }, err => console.log(err)
+      }
     );
     
     return categories;
@@ -52,10 +50,10 @@ export class CategoriesService {
     let categoriesArr: CategoryIfc[] = [];
     categories.forEach( (element: CategoryIfc) => categoriesArr.push(element));
     
-    this.saveCategoriestoDB(categoriesArr).subscribe( () => {
-        this.notification.msgSuccess('Categories', 'Categories saved at database');
-      }, err => this.notification.msgError('Categories', 'Ooops, something went wrong')
-    );
+    this.saveCategoriestoDB(categoriesArr).subscribe( {
+      next: () => this.notification.msgSuccess('Categories', 'Categories saved at database'), 
+      error: () => this.notification.msgError('Categories', 'Ooops, something went wrong')
+    });
   };
 
 }

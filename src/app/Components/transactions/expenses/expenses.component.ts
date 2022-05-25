@@ -13,7 +13,6 @@ import { CategoriesService } from 'src/app/services/http/categories.service';
 import { ExpenseService } from 'src/app/services/http/expense.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { SortingService } from 'src/app/services/sorting.service';
-import { EditItemComponent } from '../../dialog/edit-item/edit-item.component';
 
 @Component({
   selector: 'app-expenses',
@@ -55,12 +54,14 @@ export class ExpenseComponent implements OnInit {
   }
   
   private getExpenses() {
-    this.expenseService.getExpense().subscribe((getExpenses: ExpenseItem ) => {
-      this.expenseList = getExpenses;
-      this.expenseListCopy = getExpenses;
-      this.totalLength = this.getExpenses.length;
-    },
-       error => console.log(error));
+    this.expenseService.getExpense().subscribe({
+      next: ( expenseList: ExpenseItem ) => {
+        this.expenseList = expenseList;
+        this.expenseListCopy = expenseList;
+        this.totalLength = this.getExpenses.length;
+      },
+      error: error => console.log(error)
+    });
   }
 
   sortBy(prop: string) {
@@ -72,15 +73,12 @@ export class ExpenseComponent implements OnInit {
   }
 
   sortByDefault() {
-    this.sortServ.sortByDefault( this.getExpenses() )
+    this.sortServ.sortByDefault(this.getExpenses());
   }
 
   onEditItemDialog( item: ExpenseItem,  ) {
     this.router.navigate([], {queryParams: [item._id]});
-
-    this.dialogService.editItemDialog(item).afterClosed().subscribe(() => {
-      this.getExpenses();
-    })
+    this.dialogService.editItemDialog(item).afterClosed().subscribe(() => this.getExpenses());
   }
   
   onDelItemBtn( item: ExpenseItem ) {
@@ -103,12 +101,14 @@ export class ExpenseComponent implements OnInit {
     })
     .subscribe((yes) => {
       if(yes) {
-        this.expenseService.deleteAllExpenses().subscribe(() => {
-          this.notification.msgSuccess('Expenses','All Expenses deleted');
-          this.router.navigate(['/'])
-            .then(() => window.location.reload());
-        },
-        error => console.log(error)
+        this.expenseService.deleteAllExpenses().subscribe({
+          next: () => {
+            this.notification.msgSuccess('Expenses','All Expenses deleted');
+            this.router.navigate(['/'])
+              .then(() => window.location.reload());
+          },
+          error: error => console.log(error)
+        }
         );
       }
     });

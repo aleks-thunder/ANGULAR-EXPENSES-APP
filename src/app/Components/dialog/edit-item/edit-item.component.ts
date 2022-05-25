@@ -60,13 +60,14 @@ export class EditItemComponent implements OnInit {
   }
 
   onEdit() {
-    this.expenseService.updateExpense(this.expId, this.editForm.value).subscribe(() => {
-      this.notification.msgSuccess('Expense','Expense edited successfuly');
-      this.dataService.setChartsData();
-      this.closeDialog();
-    },
-    error => this.notification.msgError('Expense',error.error.error)
-    );
+    this.expenseService.updateExpense(this.expId, this.editForm.value).subscribe({
+      next: () => {
+        this.notification.msgSuccess('Expense','Expense edited successfuly');
+        this.dataService.setChartsData();
+        this.closeDialog();
+      },
+      error: error => this.notification.msgError('Expense',error.error.error)
+    });
   }
 
   closeDialog() {

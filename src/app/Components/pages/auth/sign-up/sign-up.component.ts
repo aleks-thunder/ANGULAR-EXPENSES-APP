@@ -32,16 +32,14 @@ export class SignUpComponent implements OnInit {
   }
 
   onSignUp(): void {
-    this.auth.register(this.formRegister.value).subscribe(data => {
-      this.notification.msgSuccess('Registration','Account successfule created!');
-      this.formRegister.reset();
-      this.router.navigate(['/login']);
-    },
-    error => {
-      this.notification.msgError('Registration',error.error.error);
-      console.log(error);
-    }
-    );
+    this.auth.register(this.formRegister.value).subscribe({
+      next: () => {
+        this.notification.msgSuccess('Registration','Account successfule created!');
+        this.formRegister.reset();
+        this.router.navigate(['/login']);
+      },
+      error: error => this.notification.msgError('Registration',error.error.error)
+    });
   }
   
 }
