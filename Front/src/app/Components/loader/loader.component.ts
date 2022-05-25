@@ -16,7 +16,7 @@ export class LoaderComponent implements OnInit {
   ngOnInit(): void {
     this.loaderService.getSpinnerObserver().subscribe( (status) => {
       this.show = status === true;
-      this.CDR.detectChanges();
+      // this.CDR.detectChanges();
     })
   }
 
