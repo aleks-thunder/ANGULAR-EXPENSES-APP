@@ -1,0 +1,33 @@
+<div>
+  <h1 class="title">Edit expense</h1>
+
+  <form [formGroup]="editForm" (ngSubmit)="onEdit()" class="dialog">
+    <mat-form-field appearance="outline">
+      <mat-label>Date</mat-label>
+      <input matInput [matDatepicker]="datePicker" [(ngModel)]="prevDate" formControlName="date" />
+      <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+      <mat-datepicker #datePicker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Category</mat-label>
+      <mat-select [(ngModel)]="prevCategory" formControlName="category">
+        <mat-option *ngFor="let category of categories" [value]="category.name"> {{ category.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Description</mat-label>
+      <input matInput [(ngModel)]="prevDescription" formControlName="description" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Amount</mat-label>
+      <input matInput class="amount" type="number" [(ngModel)]="prevAmount" formControlName="amount" />
+    </mat-form-field>
+
+    <button class="btn btn-success save" type="submit" [disabled]="!editForm.valid">Edit</button>
+
+    <button class="btn btn-danger cancel" type="button" (click)="closeDialog()">Cancel</button>
+  </form>
+</div>

@@ -1,0 +1,16 @@
+<div class="glass">
+  <mat-card>
+    <h1>Quick registration</h1>
+
+    <form [formGroup]="formRegister" (ngSubmit)="onSignUp()">
+      <mat-form-field appearance="legacy" *ngFor="let item of inputReg">
+        <mat-label>{{ item.label }}</mat-label>
+        <input matInput type="{{ item.type }}" formControlName="{{ item.form }}" />
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" class="btn-submit" type="submit" [disabled]="!formRegister.valid">
+        Register &check;
+      </button>
+    </form>
+  </mat-card>
+</div>

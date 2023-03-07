@@ -1,56 +1,50 @@
 <div class="sort-btns">
   <button class="m-1 btn btn-outline-primary" (click)="sortBy('date')">Date</button>
-  <button class="m-1 btn btn-outline-warning"
-          mat-button
-          [matMenuTriggerFor]="menu"
-          >Category</button>
+  <button class="m-1 btn btn-outline-warning" mat-button [matMenuTriggerFor]="menu">Category</button>
   <mat-menu #menu="matMenu">
     <button mat-menu-item (click)="sortByDefault()">Show All</button>
-    <button mat-menu-item *ngFor="let category of categories;"
-    [value]="category.name"
-    (click)="sortByCategory(category.name)">
-    {{category.name}}</button>
+    <button
+      mat-menu-item
+      *ngFor="let category of categories"
+      [value]="category.name"
+      (click)="sortByCategory(category.name)"
+    >
+      {{ category.name }}
+    </button>
   </mat-menu>
 
-  <button class="m-1 btn btn-outline-success"   (click)="sortBy('amount')">Amount</button>
-  <button class="m-1 btn btn-outline-info"      (click)="sortByDefault()">Default</button>
-  <button class="m-1 btn btn-outline-danger"    (click)="deleteAllDialog()">Delete All</button>
-  <input type="text" class="form-control" [(ngModel)]="searchValue" placeholder="Search..."/>
+  <button class="m-1 btn btn-outline-success" (click)="sortBy('amount')">Amount</button>
+  <button class="m-1 btn btn-outline-info" (click)="sortByDefault()">Default</button>
+  <button class="m-1 btn btn-outline-danger" (click)="deleteAllDialog()">Delete All</button>
+  <input type="text" class="form-control" [(ngModel)]="searchValue" placeholder="Search..." />
 </div>
 
 <div
   class="expense-row glass"
-  *ngFor="let exp of expenseList
-  | filter: searchValue
-  | paginate:
-    {
-      itemsPerPage: 5,
-      currentPage: page,
-      totalItems: totalLength
-    }"
-    [expenseColor]="exp.amount"
-    expenseZoom
-    >
-  
-  <div class="col-2">            {{ exp.date | date:'MMM d, y' }}</div>
+  *ngFor="
+    let exp of expenseList
+      | filter : searchValue
+      | paginate
+        : {
+            itemsPerPage: 5,
+            currentPage: page,
+            totalItems: totalLength
+          }
+  "
+  [expenseColor]="exp.amount"
+  expenseZoom
+>
+  <div class="col-2">{{ exp.date | date : "MMM d, y" }}</div>
   <div class="col-2 border-left">{{ exp.category }}</div>
   <div class="col-1 border-left">{{ exp.amount }} $</div>
   <div class="col-5 border-left">{{ exp.description }}</div>
 
   <div class="btns">
-    <button
-      class="btn-edit mx-1"
-      mat-mini-fab
-      color="primary"
-      (click)="onEditItemDialog(exp)">
+    <button class="btn-edit mx-1" mat-mini-fab color="primary" (click)="onEditItemDialog(exp)">
       <fa-icon [icon]="faPenSquare"></fa-icon>
     </button>
 
-    <button
-      class="btn-delete"
-      mat-mini-fab
-      color="warn"
-      (click)="onDelItemBtn(exp)">
+    <button class="btn-delete" mat-mini-fab color="warn" (click)="onDelItemBtn(exp)">
       <fa-icon [icon]="faTrash"></fa-icon>
     </button>
   </div>

@@ -1,38 +1,48 @@
 <div class="input-container">
-  <form [formGroup]="inputForm" 
-        (ngSubmit)="onSubmit()">
-
+  <form [formGroup]="inputForm" (ngSubmit)="onSubmit()">
     <ng-container *ngFor="let item of htmlInput">
       <mat-form-field appearance="legacy">
         <mat-label>{{ item.label }}</mat-label>
-        <input matInput type={{item.type}} formControlName={{item.form}}
-              *ngIf="!(item.label == 'Category' || item.label == 'Amount' || item.label == 'Datepicker')">
-              
-        <input matInput type={{item.type}} formControlName={{item.form}}
-              *ngIf="item.label == 'Category'" 
-              readonly>
+        <input
+          matInput
+          type="{{ item.type }}"
+          formControlName="{{ item.form }}"
+          *ngIf="!(item.label == 'Category' || item.label == 'Amount' || item.label == 'Datepicker')"
+        />
 
-        <input matInput type={{item.type}} formControlName={{item.form}}
-              *ngIf="item.label == 'Amount'" 
-              class="amount">
-              
-        <input matInput type={{item.type}} formControlName={{item.form}}
-              *ngIf="item.label == 'Datepicker'" 
-              [matDatepicker]="datePicker">
-        
+        <input
+          matInput
+          type="{{ item.type }}"
+          formControlName="{{ item.form }}"
+          *ngIf="item.label == 'Category'"
+          readonly
+        />
+
+        <input
+          matInput
+          type="{{ item.type }}"
+          formControlName="{{ item.form }}"
+          *ngIf="item.label == 'Amount'"
+          class="amount"
+        />
+
+        <input
+          matInput
+          type="{{ item.type }}"
+          formControlName="{{ item.form }}"
+          *ngIf="item.label == 'Datepicker'"
+          [matDatepicker]="datePicker"
+        />
+
         <mat-datepicker-toggle matSuffix [for]="datePicker" *ngIf="item.label == 'Datepicker'"></mat-datepicker-toggle>
         <mat-datepicker #datePicker></mat-datepicker>
 
         <mat-icon matSuffix> <fa-icon *ngIf="item.label == 'Description'" [icon]="faPen"></fa-icon> </mat-icon>
       </mat-form-field>
     </ng-container>
-    
-    <button mat-fab 
-            color="primary" 
-            type="submit" 
-            [disabled]="!inputForm.valid">
-      <mat-icon class="btn-submit" style="font-size:20px">&check;</mat-icon>
-    </button>
 
+    <button mat-fab color="primary" type="submit" [disabled]="!inputForm.valid">
+      <mat-icon class="btn-submit" style="font-size: 20px">&check;</mat-icon>
+    </button>
   </form>
 </div>

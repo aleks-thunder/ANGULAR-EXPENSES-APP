@@ -3,30 +3,31 @@
   <mat-card-subtitle>Drag & drop to change order list</mat-card-subtitle>
   <mat-card-content>
     <b>
-      <input  placeholder="Add new category here..." 
-      [matChipInputFor]="chipList"
-      (matChipInputTokenEnd)="addCategory($event)">
+      <input
+        placeholder="Add new category here..."
+        [matChipInputFor]="chipList"
+        (matChipInputTokenEnd)="addCategory($event)"
+      />
     </b>
-    <mat-chip-list  #contenedor 
-                    #chipList 
-                    cdkDropListGroup
-                    >
-      <ng-container *ngFor="let category of categories; 
-                    let i = index">
-        <div  cdkDropList 
-              cdkDropListOrientation="vertical" 
-              [cdkDropListData]="{item: category, index: i}"
-              (cdkDropListDropped)="dragCategory($event)"
-              >
+    <mat-chip-list #contenedor #chipList cdkDropListGroup>
+      <ng-container *ngFor="let category of categories; let i = index">
+        <div
+          cdkDropList
+          cdkDropListOrientation="vertical"
+          [cdkDropListData]="{ item: category, index: i }"
+          (cdkDropListDropped)="dragCategory($event)"
+        >
           <div cdkDrag>
             <div *cdkDragPlaceholder></div>
-            <mat-chip id="hi" #toggle="matChip" 
-                      (click)="chipSelection(toggle, category.name)" 
-                      color="warn"
-                      (removed)="removeCategory(category)"
-                      >
+            <mat-chip
+              id="hi"
+              #toggle="matChip"
+              (click)="chipSelection(toggle, category.name)"
+              color="warn"
+              (removed)="removeCategory(category)"
+            >
               <mat-icon *ngIf="toggle.selected">check</mat-icon>
-              {{category.name}}
+              {{ category.name }}
               <button matChipRemove>
                 <mat-icon>cancel</mat-icon>
               </button>
@@ -35,6 +36,8 @@
         </div>
       </ng-container>
     </mat-chip-list>
-    <button mat-raised-button color="primary" class="btn-save" (click)="onSaveCategories(categories)">save categories</button>
+    <button mat-raised-button color="primary" class="btn-save" (click)="onSaveCategories(categories)">
+      save categories
+    </button>
   </mat-card-content>
 </mat-card>

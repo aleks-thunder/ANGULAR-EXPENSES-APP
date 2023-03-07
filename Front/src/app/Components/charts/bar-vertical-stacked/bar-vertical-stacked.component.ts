@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { ChartsIfс } from 'src/app/interfaces/charts';
-import { DataService } from 'src/app/services/chart.service';
+import { Component, OnInit } from "@angular/core";
+// Services
+import { DataService } from "@services/chart.service";
+// Types
+import { Color, ScaleType } from "@swimlane/ngx-charts";
+import { ChartData } from "@shared/types/charts";
 
 @Component({
-  selector: 'app-bar-vertical-stacked',
-  templateUrl: './bar-vertical-stacked.component.html',
-  styleUrls: ['./bar-vertical-stacked.component.scss']
+  selector: "app-bar-vertical-stacked",
+  templateUrl: "./bar-vertical-stacked.component.html",
+  styleUrls: ["./bar-vertical-stacked.component.scss"],
 })
 export class BarVerticalStackedComponent implements OnInit {
-
-  data: ChartsIfс[] = [];
+  data: ChartData[] = [];
 
   // options
   view: [number, number] = [700, 300];
@@ -19,17 +21,20 @@ export class BarVerticalStackedComponent implements OnInit {
   showLegend: boolean = true;
   showXAxisLabel: boolean = true;
   showYAxisLabel: boolean = true;
-  xAxisLabel: string = 'Month';
-  yAxisLabel: string = 'Amount';
+  xAxisLabel: string = "Month";
+  yAxisLabel: string = "Amount";
   animations: boolean = true;
 
-  colorScheme: any = {
-    domain: ["#fd7f6f", "#7eb0d5", "#b2e061", "#bd7ebe", "#ffb55a", "#ffee65", "#beb9db", "#fdcce5", "#8bd3c7"]
+  colorScheme: Color = {
+    domain: ["#fd7f6f", "#7eb0d5", "#b2e061", "#bd7ebe", "#ffb55a", "#ffee65", "#beb9db", "#fdcce5", "#8bd3c7"],
+    name: "Bar",
+    selectable: false,
+    group: ScaleType.Linear,
   };
 
-  constructor(private dataService: DataService) { }
-  
+  constructor(private dataService: DataService) {}
+
   ngOnInit(): void {
-    this.dataService.chartBarData.subscribe((data: ChartsIfс[]) => this.data = data);
+    this.dataService.chartBarData.subscribe((data: ChartData[]) => (this.data = data));
   }
 }

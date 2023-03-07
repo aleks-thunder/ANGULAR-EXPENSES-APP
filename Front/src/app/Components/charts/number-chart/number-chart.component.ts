@@ -1,29 +1,33 @@
-import { Component, OnInit } from '@angular/core';
-import { ChartsIfс } from 'src/app/interfaces/charts';
-import { DataService } from 'src/app/services/chart.service';
+import { Component, OnInit } from "@angular/core";
+// Services
+import { DataService } from "@services/chart.service";
+// Types
+import { Color, ScaleType } from "@swimlane/ngx-charts";
+import { ChartData } from "@shared/types/charts";
 
 @Component({
-  selector: 'app-number-chart',
-  templateUrl: './number-chart.component.html',
-  styleUrls: ['./number-chart.component.scss']
+  selector: "app-number-chart",
+  templateUrl: "./number-chart.component.html",
+  styleUrls: ["./number-chart.component.scss"],
 })
 export class NumberChartComponent implements OnInit {
-
-  data: ChartsIfс[] = [];
+  data: ChartData[] = [];
 
   view: [number, number] = [1800, 150];
   animations: boolean = false;
-  colorScheme: any = {
-    domain: ["#e60049", "#0bb4ff", "#50e991", "#e6d800", "#9b19f5", "#ffa300", "#dc0ab4", "#b3d4ff", "#00bfa0"]
+  colorScheme: Color = {
+    domain: ["#e60049", "#0bb4ff", "#50e991", "#e6d800", "#9b19f5", "#ffa300", "#dc0ab4", "#b3d4ff", "#00bfa0"],
+    name: "Number",
+    selectable: false,
+    group: ScaleType.Linear,
   };
-  cardColor: string = '#f4ff4db3';
-  textColor: string = 'black';
 
-  constructor(private dataService: DataService) {
-  }
+  cardColor: string = "#f4ff4db3";
+  textColor: string = "black";
+
+  constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
-    this.dataService.chartNumberData.subscribe((data: ChartsIfс[]) => this.data = data)
+    this.dataService.chartNumberData.subscribe((data: ChartData[]) => (this.data = data));
   }
-
 }

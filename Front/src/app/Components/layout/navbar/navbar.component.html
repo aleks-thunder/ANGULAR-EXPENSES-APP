@@ -1,7 +1,43 @@
 <nav class="navbar bg-secondary bg-gradient justify-content-center">
-  <button *ngIf="auth.isAuthenticated()" class="btn btn-primary m-1" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="router-link-active"  routerLink="/">Home</button>
-  <button *ngIf="auth.isAuthenticated()" class="btn btn-primary m-1" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="router-link-active"  routerLink="/dashboard">Dashboard</button>
-  <button *ngIf="!auth.isAuthenticated()" class="btn btn-primary m-1" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="router-link-active"  routerLink="/login">Sign in</button>
-  <button *ngIf="!auth.isAuthenticated()" class="btn btn-primary m-1" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="router-link-active"  routerLink="/register">Sign up</button>
+  <button
+    *ngIf="auth.isAuthenticated()"
+    class="btn btn-primary m-1"
+    [routerLinkActive]="['active']"
+    [routerLinkActiveOptions]="{ exact: true }"
+    routerLinkActive="router-link-active"
+    routerLink="/"
+  >
+    Home
+  </button>
+  <button
+    *ngIf="auth.isAuthenticated()"
+    class="btn btn-primary m-1"
+    [routerLinkActive]="['active']"
+    [routerLinkActiveOptions]="{ exact: true }"
+    routerLinkActive="router-link-active"
+    routerLink="/dashboard"
+  >
+    Dashboard
+  </button>
+  <button
+    *ngIf="!auth.isAuthenticated()"
+    class="btn btn-primary m-1"
+    [routerLinkActive]="['active']"
+    [routerLinkActiveOptions]="{ exact: true }"
+    routerLinkActive="router-link-active"
+    routerLink="/login"
+  >
+    Sign in
+  </button>
+  <button
+    *ngIf="!auth.isAuthenticated()"
+    class="btn btn-primary m-1"
+    [routerLinkActive]="['active']"
+    [routerLinkActiveOptions]="{ exact: true }"
+    routerLinkActive="router-link-active"
+    routerLink="/register"
+  >
+    Sign up
+  </button>
   <button *ngIf="auth.isAuthenticated()" class="btn btn-primary m-1" href="#" (click)="onLogout()">Logout</button>
 </nav>

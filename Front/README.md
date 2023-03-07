@@ -6,10 +6,9 @@ Express: 4.17.3,
 Mongoose: 6.2.8,
 Node: 16.14.0.
 
-
 ## Development server
 
 Switch on MongoDB.
 Run `ng serve` \ `ng s` for angular server. Navigate to `http://localhost:4200/`.
-Run `npm run server` \ `npm run s` for backend server. 
+Run `npm run server` \ `npm run s` for backend server.
 Enjoy.

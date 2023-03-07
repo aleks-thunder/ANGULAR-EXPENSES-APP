@@ -1,0 +1,36 @@
+<div class="glass">
+  <mat-card>
+    <h1>Have an account ?</h1>
+    <h1>Just Log In</h1>
+
+    <form [formGroup]="formLogin" (ngSubmit)="onLogin()">
+      <mat-form-field appearance="legacy" *ngFor="let item of inputLog">
+        <mat-label>{{ item.label }}</mat-label>
+
+        <input *ngIf="item.label == 'Login'" matInput type="{{ item.type }}" formControlName="{{ item.form }}" />
+
+        <input
+          *ngIf="item.label == 'Password'"
+          matInput
+          [type]="hide ? 'password' : 'text'"
+          formControlName="{{ item.form }}"
+        />
+
+        <button
+          *ngIf="item.label == 'Password'"
+          mat-icon-button
+          matSuffix
+          (click)="hide = !hide"
+          type="button"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide"
+        >
+          <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+        </button>
+      </mat-form-field>
+      <button mat-raised-button color="primary" class="btn-submit" type="submit" [disabled]="!formLogin.valid">
+        Log in &check;
+      </button>
+    </form>
+  </mat-card>
+</div>

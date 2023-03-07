@@ -2,8 +2,8 @@
 
 
 #pattern
-src/app/Components/pages/auth/html
-src/app/Components/pages/auth/style
+src/app/components/pages/auth/html
+src/app/components/pages/auth/style
 copy
 server/request.rest
 
