@@ -10,9 +10,19 @@ import { AuthGuard } from "./core/guards/auth.guard";
 import { PageNotFoundComponent } from "./pages/page-not-found/page-not-found.component";
 
 const routes: Routes = [
-  { path: "", component: HomeComponent, canActivate: [AuthGuard] },
-  { path: "login", component: SignInComponent },
-  { path: "register", component: SignUpComponent },
+  {
+    path: "",
+    component: HomeComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "login",
+    component: SignInComponent,
+  },
+  {
+    path: "register",
+    component: SignUpComponent,
+  },
   {
     path: "dashboard",
     component: DashboardComponent,

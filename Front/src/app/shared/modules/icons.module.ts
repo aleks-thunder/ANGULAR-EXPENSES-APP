@@ -6,7 +6,7 @@ import { MatIconModule, MatIconRegistry } from "@angular/material/icon";
   imports: [],
   exports: [MatIconModule],
 })
-export class SharedIconsModule {
+export class IconsModule {
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
     iconRegistry.addSvgIconSet(sanitizer.bypassSecurityTrustResourceUrl("assets/icons/icons.svg"));
   }

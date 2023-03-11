@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { Observable } from "rxjs";
-import { DeleteConfirmationComponent } from "src/app/components/modals/delete-confirmation/delete-confirmation.component";
-import { EditItemComponent } from "src/app/components/modals/edit-item/edit-item.component";
+import { DeleteModalComponents } from "@app/components/modals/delete-modal/delete-modal.component";
+import { EditIModalComponent } from "@app/components/modals/edit-modal/edit-modal.component";
 import { ExpenseItem } from "@shared/types/expense-item";
 
 @Injectable({
@@ -13,7 +13,7 @@ export class DialogService {
 
   confirmDialog(data: {}): Observable<boolean> {
     return this.dialog
-      .open(DeleteConfirmationComponent, {
+      .open(DeleteModalComponents, {
         data,
         width: "400px",
       })
@@ -21,11 +21,12 @@ export class DialogService {
   }
 
   editItemDialog(item: ExpenseItem) {
-    return this.dialog.open(EditItemComponent, {
-      width: "500px",
-      height: "650px",
-      data: item,
-    });
-    // .afterClosed()
+    return this.dialog
+      .open(EditIModalComponent, {
+        width: "500px",
+        height: "650px",
+        data: item,
+      })
+      .afterClosed();
   }
 }

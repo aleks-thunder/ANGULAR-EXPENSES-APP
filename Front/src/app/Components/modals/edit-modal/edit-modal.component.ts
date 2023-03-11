@@ -18,9 +18,9 @@ const dateFormat = {
 };
 
 @Component({
-  selector: "app-edit-item",
-  templateUrl: "./edit-item.component.html",
-  styleUrls: ["./edit-item.component.scss"],
+  selector: "app-edit-modal",
+  templateUrl: "./edit-modal.component.html",
+  styleUrls: ["./edit-modal.component.scss"],
   providers: [
     {
       provide: DateAdapter,
@@ -33,7 +33,7 @@ const dateFormat = {
     },
   ],
 })
-export class EditItemComponent implements OnInit {
+export class EditIModalComponent implements OnInit {
   categories!: Category[];
 
   editForm!: FormGroup;
@@ -46,7 +46,7 @@ export class EditItemComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public oldExpense: ExpenseItem,
-    public dialogRef: MatDialogRef<EditItemComponent>,
+    public dialogRef: MatDialogRef<EditIModalComponent>,
     private reactiveFormsBuilder: ReactiveFormsBuilder,
     private expenseService: ExpenseService,
     private notification: NotificationService,

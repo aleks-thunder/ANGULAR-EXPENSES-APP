@@ -77,8 +77,8 @@ export class ExpenseComponent implements OnInit {
     this.router.navigate([], { queryParams: [item._id] });
     this.dialogService
       .editItemDialog(item)
-      .afterClosed()
-      .subscribe(() => this.getExpenses());
+      // .afterClosed()
+      // .subscribe(() => this.getExpenses());
   }
 
   onDelItemBtn(item: ExpenseItem) {
