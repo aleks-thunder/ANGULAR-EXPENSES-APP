@@ -1,8 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 
-import { faPen } from "@fortawesome/free-solid-svg-icons";
-
 import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from "@angular/material-moment-adapter";
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from "@angular/material/core";
 import { Input } from "@shared/types/input";
@@ -35,8 +33,6 @@ const dateFormat = {
   ],
 })
 export class InputExpenseComponent implements OnInit {
-  faPen = faPen;
-
   categories: string = "";
 
   inputForm!: FormGroup;

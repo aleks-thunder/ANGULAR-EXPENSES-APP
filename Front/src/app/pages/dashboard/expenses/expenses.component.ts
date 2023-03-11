@@ -2,8 +2,6 @@ import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { Router } from "@angular/router";
 
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import { faPenSquare } from "@fortawesome/free-solid-svg-icons";
 import { Category } from "@shared/types/category";
 
 import { ExpenseItem } from "@shared/types/expense-item";
@@ -23,9 +21,6 @@ export class ExpenseComponent implements OnInit {
   categories: Category[] = [];
   expenseList: ExpenseItem[] = [];
   expenseListCopy: ExpenseItem = [];
-
-  faTrash = faTrash;
-  faPenSquare = faPenSquare;
 
   totalLength: number = 0;
   page: number = 1;

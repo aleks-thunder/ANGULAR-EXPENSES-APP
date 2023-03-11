@@ -34,14 +34,14 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: "page-not-found",
+    path: "404",
     component: PageNotFoundComponent,
     canActivate: [AuthGuard],
   },
 
   {
     path: "**",
-    redirectTo: "page-not-found",
+    redirectTo: "404",
   },
 ];
 

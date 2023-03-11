@@ -37,7 +37,9 @@
         <mat-datepicker-toggle matSuffix [for]="datePicker" *ngIf="item.label == 'Datepicker'"></mat-datepicker-toggle>
         <mat-datepicker #datePicker></mat-datepicker>
 
-        <mat-icon matSuffix> <fa-icon *ngIf="item.label == 'Description'" [icon]="faPen"></fa-icon> </mat-icon>
+        <mat-icon matSuffix>
+          <svg-icon [icon]="'pen'" [width]="'24px'" [height]="'24px'"></svg-icon>
+        </mat-icon>
       </mat-form-field>
     </ng-container>
 

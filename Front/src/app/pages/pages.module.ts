@@ -3,7 +3,6 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgMaterialModule } from "@app/shared/modules/ng-material.module";
-import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { DragDropModule } from "@angular/cdk/drag-drop";
 import { NgxPaginationModule } from "ngx-pagination";
 
@@ -21,7 +20,6 @@ const modules = [
   CommonModule,
   ComponentsModule,
   NgMaterialModule,
-  FontAwesomeModule,
   FormsModule,
   ReactiveFormsModule,
   DragDropModule,

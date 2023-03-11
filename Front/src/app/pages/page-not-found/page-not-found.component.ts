@@ -4,14 +4,14 @@ import { Component } from "@angular/core";
   selector: "app-page-not-found",
   template: `
     <div>
-      <!-- <svg-icon [icon]="'page-not-found'" [width]="'45rem'" [height]="'45rem'"></svg-icon> -->
+      <img src="../../../assets/images/404.png" />
     </div>
   `,
   styles: [
     `
       div {
-        display: flex;
-        justify-content: center;
+        height: calc(100% - 50px);
+        width: 100%;
       }
     `,
   ],
