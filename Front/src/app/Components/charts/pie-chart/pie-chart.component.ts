@@ -6,7 +6,7 @@ import { Color, ScaleType } from "@swimlane/ngx-charts";
 import { ChartData } from "@shared/types/charts";
 
 @Component({
-  selector: "app-pie-chart",
+  selector: "pie-chart",
   templateUrl: "./pie-chart.component.html",
 })
 export class PieChartComponent implements OnInit {

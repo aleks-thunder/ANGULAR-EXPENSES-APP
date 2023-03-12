@@ -6,7 +6,7 @@ import { Color, ScaleType } from "@swimlane/ngx-charts";
 import { ChartData } from "@shared/types/charts";
 
 @Component({
-  selector: "app-advanced-pie",
+  selector: "advanced-pie",
   templateUrl: "./advanced-pie.component.html",
 })
 export class AdvancedPieComponent implements OnInit {

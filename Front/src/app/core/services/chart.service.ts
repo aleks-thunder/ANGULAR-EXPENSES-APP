@@ -122,7 +122,7 @@ export class DataService {
     this.chartPieData.next(result);
   }
 
-  private setChartAdvancedPieData(expenseList: ExpenseItem) {
+  private setChartAdvancedPieData(expenseList: ExpenseItem[]) {
     const result: ChartData[] = expenseList.map((item: ExpenseItem) => ({
       name: item.category,
       value: Math.abs(item.amount!),

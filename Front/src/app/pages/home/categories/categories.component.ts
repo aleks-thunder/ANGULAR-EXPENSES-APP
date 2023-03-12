@@ -7,7 +7,7 @@ import { CdkDragDrop } from "@angular/cdk/drag-drop";
 import { CategoriesService } from "@services/http/categories.service";
 
 @Component({
-  selector: "app-categories",
+  selector: "categories",
   templateUrl: "./categories.component.html",
   styleUrls: ["./categories.component.scss"],
   encapsulation: ViewEncapsulation.None,

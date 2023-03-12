@@ -1,25 +1,25 @@
 <div class="social-links">
   <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
     <mat-icon>
-      <svg-icon [icon]="'pen'" [width]="'24px'" [height]="'24px'"></svg-icon>
+      <svg-icon [icon]="'user-icon'" [cursor]="'pointer'" [width]="'36px'" [height]="'36px'"></svg-icon>
     </mat-icon>
   </button>
   <mat-menu #menu="matMenu">
     <button mat-menu-item>
       <a href="mailto:aleks.thunder.m@gmail.com"
-        ><svg-icon [icon]="'pen'" [width]="'24px'" [height]="'24px'"></svg-icon>Mail author
+        ><svg-icon [icon]="'mail'" [mr]="'10px'" [width]="'24px'" [height]="'24px'"></svg-icon>Mail author
       </a>
     </button>
 
     <button mat-menu-item>
       <a href="https://github.com/aleks-thunder" target="_blank">
-        <svg-icon [icon]="'pen'" [width]="'24px'" [height]="'24px'"></svg-icon>GitHub
+        <svg-icon [icon]="'git'" [mr]="'10px'" [width]="'24px'" [height]="'24px'"></svg-icon>GitHub
       </a>
     </button>
 
     <button mat-menu-item>
       <a href="https://www.linkedin.com/in/oleksandr-moisieienko-b39a52238/" target="_blank">
-        <svg-icon [icon]="'pen'" [width]="'24px'" [height]="'24px'"></svg-icon>
+        <svg-icon [icon]="'linked-in'" [mr]="'10px'" [width]="'24px'" [height]="'24px'"></svg-icon>
         Linkedin
       </a>
     </button>

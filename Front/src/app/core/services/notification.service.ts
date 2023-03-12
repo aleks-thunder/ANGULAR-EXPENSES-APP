@@ -9,7 +9,7 @@ export class NotificationService {
 
   msgSuccess(title: string, message: string) {
     this.notification.success(title, message, {
-      position: ["bottom", "right"],
+      position: ["top", "right"],
       timeOut: 3000,
       animate: "fade",
       showProgressBar: true,
@@ -18,7 +18,7 @@ export class NotificationService {
 
   msgError(title: string, message: string) {
     this.notification.error(title, message, {
-      position: ["bottom", "right"],
+      position: ["top", "right"],
       timeOut: 5000,
       animate: "fade",
       showProgressBar: true,
@@ -27,7 +27,7 @@ export class NotificationService {
 
   msgWarning(title: string, message: string) {
     this.notification.warn(title, message, {
-      position: ["bottom", "right"],
+      position: ["top", "right"],
       timeOut: 5000,
       animate: "fade",
       showProgressBar: true,

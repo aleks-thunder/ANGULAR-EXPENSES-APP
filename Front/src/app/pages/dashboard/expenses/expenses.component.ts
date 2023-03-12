@@ -17,7 +17,7 @@ import { SortingService } from "@services/sorting.service";
   templateUrl: "./expenses.component.html",
   styleUrls: ["./expenses.component.scss"],
 })
-export class ExpenseComponent implements OnInit {
+export class ExpensesComponent implements OnInit {
   categories: Category[] = [];
   expenseList: ExpenseItem[] = [];
   expenseListCopy: ExpenseItem = [];
@@ -36,7 +36,7 @@ export class ExpenseComponent implements OnInit {
     private categoryService: CategoriesService,
     private notification: NotificationService,
     private dataService: DataService,
-    private sortServ: SortingService,
+    private sortingService: SortingService,
     private dialogService: DialogService,
   ) {}
 
@@ -57,23 +57,23 @@ export class ExpenseComponent implements OnInit {
   }
 
   sortBy(prop: string) {
-    this.sortServ.sortBy(prop, this.expenseList);
+    this.sortingService.sortBy(prop, this.expenseList);
   }
 
-  sortByCategory(category: string | undefined) {
-    this.expenseList = this.sortServ.sortByCategory(this.expenseList, this.expenseListCopy, category);
+  sortByCategory(category?: string) {
+    this.expenseList = this.sortingService.sortByCategory(this.expenseListCopy, category);
   }
 
   sortByDefault() {
-    this.sortServ.sortByDefault(this.getExpenses());
+    this.sortingService.sortByDefault(this.getExpenses());
   }
 
   onEditItemDialog(item: ExpenseItem) {
     this.router.navigate([], { queryParams: [item._id] });
     this.dialogService
       .editItemDialog(item)
-      // .afterClosed()
-      // .subscribe(() => this.getExpenses());
+      .afterClosed()
+      .subscribe(() => this.getExpenses());
   }
 
   onDelItemBtn(item: ExpenseItem) {
@@ -93,8 +93,8 @@ export class ExpenseComponent implements OnInit {
       .confirmDialog({
         title: "Are you sure?",
         message: "Are you sure you want to do this?",
-        confirmCaption: "Yes",
-        cancelCaption: "No",
+        confirmationText: "Yes",
+        cancelText: "No",
       })
       .subscribe(yes => {
         if (yes) {

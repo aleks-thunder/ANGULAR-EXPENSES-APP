@@ -6,7 +6,7 @@ import { Color, ScaleType } from "@swimlane/ngx-charts";
 import { ChartData } from "@shared/types/charts";
 
 @Component({
-  selector: "app-bar-vertical-stacked",
+  selector: "bar-vertical-stacked",
   templateUrl: "./bar-vertical-stacked.component.html",
   styleUrls: ["./bar-vertical-stacked.component.scss"],
 })

@@ -14,13 +14,12 @@ export class SortingService {
     return expenses;
   }
 
-  sortByCategory(expenseList: ExpenseItem, expenseListCopy: ExpenseItem, category: string | undefined) {
-    return (expenseList = expenseListCopy.filter((items: ExpenseItem) => items.category === category));
+  sortByCategory(expenseListCopy: ExpenseItem, category?: string) {
+    return (expenseListCopy.filter((items: ExpenseItem) => items.category === category));
   }
 
   sortBy(prop: string, expenseList: any) {
     this.sortClickCount += 1;
-    // console.log(this.CDR.markForCheck);
 
     this.sortClickCount % 2 === 0
       ? expenseList.sort(this.sorting(prop, true))

@@ -21,12 +21,10 @@ export class DialogService {
   }
 
   editItemDialog(item: ExpenseItem) {
-    return this.dialog
-      .open(EditIModalComponent, {
-        width: "500px",
-        height: "650px",
-        data: item,
-      })
-      .afterClosed();
+    return this.dialog.open(EditIModalComponent, {
+      width: "500px",
+      height: "650px",
+      data: item,
+    });
   }
 }

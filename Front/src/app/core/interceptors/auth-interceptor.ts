@@ -9,7 +9,7 @@ import { LoaderService } from "@services/loader.service";
 export class AuthInterceptor implements HttpInterceptor {
   constructor(private loader: LoaderService) {}
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const idToken = localStorage.getItem("access_token");
 
     this.loader.start();

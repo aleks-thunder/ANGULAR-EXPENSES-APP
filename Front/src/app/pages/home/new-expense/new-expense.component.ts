@@ -3,23 +3,25 @@ import { FormGroup } from "@angular/forms";
 
 import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from "@angular/material-moment-adapter";
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from "@angular/material/core";
-import { Input } from "@shared/types/input";
+
 import { InputHTML } from "src/app/shared/helpers/input-html";
 import { ReactiveFormsBuilder } from "@shared/helpers/form-bilders";
+import { CategoryInputHelper } from "@shared/helpers/category-input-helper";
 
 import { ExpenseService } from "@services/http/expense.service";
 import { NotificationService } from "@services/notification.service";
-import { CategoryInputHelper } from "src/app/shared/helpers/category-input-helper";
 import { DataService } from "@services/chart.service";
+
+import { Input } from "@shared/types/input";
 
 const dateFormat = {
   display: { dateInput: "ll", monthYearLabel: "MMMM YYYY" },
 };
 
 @Component({
-  selector: "app-input-expense",
-  templateUrl: "./input-expense.component.html",
-  styleUrls: ["./input-expense.component.scss"],
+  selector: "new-expense",
+  templateUrl: "./new-expense.component.html",
+  styleUrls: ["./new-expense.component.scss"],
   providers: [
     {
       provide: DateAdapter,
@@ -32,7 +34,7 @@ const dateFormat = {
     },
   ],
 })
-export class InputExpenseComponent implements OnInit {
+export class NewExpenseComponent implements OnInit {
   categories: string = "";
 
   inputForm!: FormGroup;

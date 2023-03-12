@@ -6,7 +6,7 @@ import { Color, ScaleType } from "@swimlane/ngx-charts";
 import { ChartData } from "@shared/types/charts";
 
 @Component({
-  selector: "app-number-chart",
+  selector: "number-chart",
   templateUrl: "./number-chart.component.html",
   styleUrls: ["./number-chart.component.scss"],
 })
